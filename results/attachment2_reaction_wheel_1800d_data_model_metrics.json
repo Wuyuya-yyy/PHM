@@ -1,0 +1,36 @@
+{
+  "target": "current",
+  "exponential": {
+    "parameters": [
+      0.10936401747530448,
+      0.3532752737653002,
+      1.2539848013597192
+    ],
+    "metrics": {
+      "RMSE": 0.007908420170681019,
+      "MAE": 0.006292965354412858,
+      "R2": 0.9990184252318618
+    },
+    "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment2_reaction_wheel_1800d_data_current_exponential_fit.png"
+  },
+  "wiener": {
+    "drift": 0.0004972777777777778,
+    "diffusion": 0.011237381451679768,
+    "metrics": {
+      "RMSE": 0.10808310532612404,
+      "MAE": 0.09962422302424583,
+      "R2": 0.8166590220318031
+    },
+    "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment2_reaction_wheel_1800d_data_current_wiener_baseline.png"
+  },
+  "lstm_baseline": {
+    "model": "torch_lstm",
+    "sequence_length": 12,
+    "metrics": {
+      "RMSE": 0.009661452427013028,
+      "MAE": 0.00769715382622587,
+      "R2": 0.9985350299184412
+    },
+    "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment2_reaction_wheel_1800d_data_current_lstm_baseline.png"
+  }
+}

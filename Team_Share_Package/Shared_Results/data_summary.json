@@ -1,0 +1,185 @@
+{
+  "source_dir": "C:\\Users\\35135\\Desktop\\数模校赛",
+  "problem_pdf": [
+    "C:\\Users\\35135\\Desktop\\数模校赛\\2026数模校赛A题（27届本科生赛） 卫星飞轮的预测式“健康管理“.pdf"
+  ],
+  "data_files": [
+    {
+      "file_name": "附件1 reaction_wheel_3500d_data.csv",
+      "path": "C:\\Users\\35135\\Desktop\\数模校赛\\附件1 reaction_wheel_3500d_data.csv",
+      "extension": ".csv",
+      "shape": [
+        176,
+        6
+      ],
+      "columns": [
+        "day",
+        "current",
+        "current_theoretical",
+        "temperature",
+        "speed_rpm",
+        "friction_torque"
+      ],
+      "missing_values": {
+        "day": 0,
+        "current": 0,
+        "current_theoretical": 0,
+        "temperature": 0,
+        "speed_rpm": 0,
+        "friction_torque": 0
+      },
+      "dtypes": {
+        "day": "int64",
+        "current": "float64",
+        "current_theoretical": "float64",
+        "temperature": "float64",
+        "speed_rpm": "int64",
+        "friction_torque": "float64"
+      },
+      "numeric_describe": {
+        "day": {
+          "count": 176.0,
+          "mean": 1750.0,
+          "std": 1019.019136,
+          "min": 0.0,
+          "25%": 875.0,
+          "50%": 1750.0,
+          "75%": 2625.0,
+          "max": 3500.0
+        },
+        "current": {
+          "count": 176.0,
+          "mean": 0.709787,
+          "std": 0.43171,
+          "min": 0.113,
+          "25%": 0.325225,
+          "50%": 0.6353,
+          "75%": 1.046175,
+          "max": 1.6139
+        },
+        "current_theoretical": {
+          "count": 176.0,
+          "mean": 0.710143,
+          "std": 0.430951,
+          "min": 0.109702,
+          "25%": 0.332902,
+          "50%": 0.636078,
+          "75%": 1.047886,
+          "max": 1.607245
+        },
+        "temperature": {
+          "count": 176.0,
+          "mean": 39.767614,
+          "std": 3.453466,
+          "min": 35.0,
+          "25%": 36.7,
+          "50%": 39.2,
+          "75%": 42.5,
+          "max": 47.0
+        },
+        "speed_rpm": {
+          "count": 176.0,
+          "mean": 3000.0,
+          "std": 0.0,
+          "min": 3000.0,
+          "25%": 3000.0,
+          "50%": 3000.0,
+          "75%": 3000.0,
+          "max": 3000.0
+        },
+        "friction_torque": {
+          "count": 176.0,
+          "mean": 0.029116,
+          "std": 0.017669,
+          "min": 0.004498,
+          "25%": 0.013649,
+          "50%": 0.026079,
+          "75%": 0.042963,
+          "max": 0.065897
+        }
+      }
+    },
+    {
+      "file_name": "附件2 reaction_wheel_1800d_data.csv",
+      "path": "C:\\Users\\35135\\Desktop\\数模校赛\\附件2 reaction_wheel_1800d_data.csv",
+      "extension": ".csv",
+      "shape": [
+        1801,
+        5
+      ],
+      "columns": [
+        "day",
+        "current",
+        "current_theoretical",
+        "temperature",
+        "speed_rpm"
+      ],
+      "missing_values": {
+        "day": 0,
+        "current": 0,
+        "current_theoretical": 0,
+        "temperature": 0,
+        "speed_rpm": 0
+      },
+      "dtypes": {
+        "day": "int64",
+        "current": "float64",
+        "current_theoretical": "float64",
+        "temperature": "float64",
+        "speed_rpm": "int64"
+      },
+      "numeric_describe": {
+        "day": {
+          "count": 1801.0,
+          "mean": 900.0,
+          "std": 520.048235,
+          "min": 0.0,
+          "25%": 450.0,
+          "50%": 900.0,
+          "75%": 1350.0,
+          "max": 1800.0
+        },
+        "current": {
+          "count": 1801.0,
+          "mean": 0.46165,
+          "std": 0.252493,
+          "min": 0.0976,
+          "25%": 0.239,
+          "50%": 0.4198,
+          "75%": 0.6596,
+          "max": 1.0088
+        },
+        "current_theoretical": {
+          "count": 1801.0,
+          "mean": 0.461256,
+          "std": 0.25211,
+          "min": 0.1097,
+          "25%": 0.239291,
+          "50%": 0.416864,
+          "75%": 0.660185,
+          "max": 0.993598
+        },
+        "temperature": {
+          "count": 1801.0,
+          "mean": 37.784398,
+          "std": 2.019017,
+          "min": 35.0,
+          "25%": 36.0,
+          "50%": 37.4,
+          "75%": 39.4,
+          "max": 42.2
+        },
+        "speed_rpm": {
+          "count": 1801.0,
+          "mean": 3000.0,
+          "std": 0.0,
+          "min": 3000.0,
+          "25%": 3000.0,
+          "50%": 3000.0,
+          "75%": 3000.0,
+          "max": 3000.0
+        }
+      }
+    }
+  ]
+}

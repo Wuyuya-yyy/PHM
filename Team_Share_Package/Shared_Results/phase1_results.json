@@ -1,0 +1,522 @@
+{
+  "data_summary": {
+    "source_dir": "C:\\Users\\35135\\Desktop\\数模校赛",
+    "problem_pdf": [
+      "C:\\Users\\35135\\Desktop\\数模校赛\\2026数模校赛A题（27届本科生赛） 卫星飞轮的预测式“健康管理“.pdf"
+    ],
+    "data_files": [
+      {
+        "file_name": "附件1 reaction_wheel_3500d_data.csv",
+        "path": "C:\\Users\\35135\\Desktop\\数模校赛\\附件1 reaction_wheel_3500d_data.csv",
+        "extension": ".csv",
+        "shape": [
+          176,
+          6
+        ],
+        "columns": [
+          "day",
+          "current",
+          "current_theoretical",
+          "temperature",
+          "speed_rpm",
+          "friction_torque"
+        ],
+        "missing_values": {
+          "day": 0,
+          "current": 0,
+          "current_theoretical": 0,
+          "temperature": 0,
+          "speed_rpm": 0,
+          "friction_torque": 0
+        },
+        "dtypes": {
+          "day": "int64",
+          "current": "float64",
+          "current_theoretical": "float64",
+          "temperature": "float64",
+          "speed_rpm": "int64",
+          "friction_torque": "float64"
+        },
+        "numeric_describe": {
+          "day": {
+            "count": 176.0,
+            "mean": 1750.0,
+            "std": 1019.019136,
+            "min": 0.0,
+            "25%": 875.0,
+            "50%": 1750.0,
+            "75%": 2625.0,
+            "max": 3500.0
+          },
+          "current": {
+            "count": 176.0,
+            "mean": 0.709787,
+            "std": 0.43171,
+            "min": 0.113,
+            "25%": 0.325225,
+            "50%": 0.6353,
+            "75%": 1.046175,
+            "max": 1.6139
+          },
+          "current_theoretical": {
+            "count": 176.0,
+            "mean": 0.710143,
+            "std": 0.430951,
+            "min": 0.109702,
+            "25%": 0.332902,
+            "50%": 0.636078,
+            "75%": 1.047886,
+            "max": 1.607245
+          },
+          "temperature": {
+            "count": 176.0,
+            "mean": 39.767614,
+            "std": 3.453466,
+            "min": 35.0,
+            "25%": 36.7,
+            "50%": 39.2,
+            "75%": 42.5,
+            "max": 47.0
+          },
+          "speed_rpm": {
+            "count": 176.0,
+            "mean": 3000.0,
+            "std": 0.0,
+            "min": 3000.0,
+            "25%": 3000.0,
+            "50%": 3000.0,
+            "75%": 3000.0,
+            "max": 3000.0
+          },
+          "friction_torque": {
+            "count": 176.0,
+            "mean": 0.029116,
+            "std": 0.017669,
+            "min": 0.004498,
+            "25%": 0.013649,
+            "50%": 0.026079,
+            "75%": 0.042963,
+            "max": 0.065897
+          }
+        }
+      },
+      {
+        "file_name": "附件2 reaction_wheel_1800d_data.csv",
+        "path": "C:\\Users\\35135\\Desktop\\数模校赛\\附件2 reaction_wheel_1800d_data.csv",
+        "extension": ".csv",
+        "shape": [
+          1801,
+          5
+        ],
+        "columns": [
+          "day",
+          "current",
+          "current_theoretical",
+          "temperature",
+          "speed_rpm"
+        ],
+        "missing_values": {
+          "day": 0,
+          "current": 0,
+          "current_theoretical": 0,
+          "temperature": 0,
+          "speed_rpm": 0
+        },
+        "dtypes": {
+          "day": "int64",
+          "current": "float64",
+          "current_theoretical": "float64",
+          "temperature": "float64",
+          "speed_rpm": "int64"
+        },
+        "numeric_describe": {
+          "day": {
+            "count": 1801.0,
+            "mean": 900.0,
+            "std": 520.048235,
+            "min": 0.0,
+            "25%": 450.0,
+            "50%": 900.0,
+            "75%": 1350.0,
+            "max": 1800.0
+          },
+          "current": {
+            "count": 1801.0,
+            "mean": 0.46165,
+            "std": 0.252493,
+            "min": 0.0976,
+            "25%": 0.239,
+            "50%": 0.4198,
+            "75%": 0.6596,
+            "max": 1.0088
+          },
+          "current_theoretical": {
+            "count": 1801.0,
+            "mean": 0.461256,
+            "std": 0.25211,
+            "min": 0.1097,
+            "25%": 0.239291,
+            "50%": 0.416864,
+            "75%": 0.660185,
+            "max": 0.993598
+          },
+          "temperature": {
+            "count": 1801.0,
+            "mean": 37.784398,
+            "std": 2.019017,
+            "min": 35.0,
+            "25%": 36.0,
+            "50%": 37.4,
+            "75%": 39.4,
+            "max": 42.2
+          },
+          "speed_rpm": {
+            "count": 1801.0,
+            "mean": 3000.0,
+            "std": 0.0,
+            "min": 3000.0,
+            "25%": 3000.0,
+            "50%": 3000.0,
+            "75%": 3000.0,
+            "max": 3000.0
+          }
+        }
+      }
+    ]
+  },
+  "eda": {
+    "attachment1_reaction_wheel_3500d_data": {
+      "statistics": {
+        "missing_values": {
+          "day": 0,
+          "current": 0,
+          "current_theoretical": 0,
+          "temperature": 0,
+          "speed_rpm": 0,
+          "friction_torque": 0
+        },
+        "outlier_counts_z3": {
+          "day": 0,
+          "current": 0,
+          "current_theoretical": 0,
+          "temperature": 0,
+          "speed_rpm": 0,
+          "friction_torque": 0
+        },
+        "correlation": {
+          "day": {
+            "day": 1.0,
+            "current": 0.987538,
+            "current_theoretical": 0.987718,
+            "temperature": 0.987637,
+            "friction_torque": 0.987718
+          },
+          "current": {
+            "day": 0.987538,
+            "current": 1.0,
+            "current_theoretical": 0.999852,
+            "temperature": 0.999966,
+            "friction_torque": 0.999852
+          },
+          "current_theoretical": {
+            "day": 0.987718,
+            "current": 0.999852,
+            "current_theoretical": 1.0,
+            "temperature": 0.999822,
+            "friction_torque": 1.0
+          },
+          "temperature": {
+            "day": 0.987637,
+            "current": 0.999966,
+            "current_theoretical": 0.999822,
+            "temperature": 1.0,
+            "friction_torque": 0.999822
+          },
+          "friction_torque": {
+            "day": 0.987718,
+            "current": 0.999852,
+            "current_theoretical": 1.0,
+            "temperature": 0.999822,
+            "friction_torque": 1.0
+          }
+        }
+      },
+      "figures": [
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_missing_values.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_time_series_trends.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_current_analysis.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_temperature_analysis.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_speed_rpm_analysis.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_friction_torque_analysis.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_current_rolling_statistics.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_temperature_rolling_statistics.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_speed_rpm_rolling_statistics.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_friction_torque_rolling_statistics.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_current_fft_spectrum.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_temperature_fft_spectrum.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_friction_torque_fft_spectrum.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_current_wavelet_scalogram.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_temperature_wavelet_scalogram.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_correlation_heatmap.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_multivariate_relationships.png"
+      ]
+    },
+    "attachment2_reaction_wheel_1800d_data": {
+      "statistics": {
+        "missing_values": {
+          "day": 0,
+          "current": 0,
+          "current_theoretical": 0,
+          "temperature": 0,
+          "speed_rpm": 0
+        },
+        "outlier_counts_z3": {
+          "day": 0,
+          "current": 0,
+          "current_theoretical": 0,
+          "temperature": 0,
+          "speed_rpm": 0
+        },
+        "correlation": {
+          "day": {
+            "day": 1.0,
+            "current": 0.986789,
+            "current_theoretical": 0.987155,
+            "temperature": 0.986602
+          },
+          "current": {
+            "day": 0.986789,
+            "current": 1.0,
+            "current_theoretical": 0.999509,
+            "temperature": 0.999896
+          },
+          "current_theoretical": {
+            "day": 0.987155,
+            "current": 0.999509,
+            "current_theoretical": 1.0,
+            "temperature": 0.999423
+          },
+          "temperature": {
+            "day": 0.986602,
+            "current": 0.999896,
+            "current_theoretical": 0.999423,
+            "temperature": 1.0
+          }
+        }
+      },
+      "figures": [
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_missing_values.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_time_series_trends.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_current_analysis.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_temperature_analysis.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_speed_rpm_analysis.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_current_rolling_statistics.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_temperature_rolling_statistics.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_speed_rpm_rolling_statistics.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_current_fft_spectrum.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_temperature_fft_spectrum.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_current_wavelet_scalogram.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_temperature_wavelet_scalogram.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_correlation_heatmap.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_multivariate_relationships.png"
+      ]
+    }
+  },
+  "health_index": {
+    "attachment1_reaction_wheel_3500d_data": {
+      "metadata": {
+        "time_column": "day",
+        "feature_columns": [
+          "current",
+          "temperature",
+          "friction_torque",
+          "speed_rpm"
+        ],
+        "pca_explained_variance_ratio": 0.999919989516465,
+        "autoencoder_interface": "reserved"
+      },
+      "processed_path": "C:\\Users\\35135\\Desktop\\PHM\\processed_data\\attachment1_reaction_wheel_3500d_data_health_index.csv",
+      "figures": [
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\hi\\attachment1_reaction_wheel_3500d_data_health_index_curve.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\hi\\attachment1_reaction_wheel_3500d_data_hi_trend_and_derivative.png"
+      ]
+    },
+    "attachment2_reaction_wheel_1800d_data": {
+      "metadata": {
+        "time_column": "day",
+        "feature_columns": [
+          "current",
+          "temperature",
+          "speed_rpm"
+        ],
+        "pca_explained_variance_ratio": 0.9999479113670362,
+        "autoencoder_interface": "reserved"
+      },
+      "processed_path": "C:\\Users\\35135\\Desktop\\PHM\\processed_data\\attachment2_reaction_wheel_1800d_data_health_index.csv",
+      "figures": [
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\hi\\attachment2_reaction_wheel_1800d_data_health_index_curve.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\hi\\attachment2_reaction_wheel_1800d_data_hi_trend_and_derivative.png"
+      ]
+    }
+  },
+  "stage_segmentation": {
+    "attachment1_reaction_wheel_3500d_data": {
+      "boundaries": {
+        "threshold": [
+          58,
+          123
+        ],
+        "derivative": [
+          96,
+          144
+        ],
+        "bayesian": [
+          57,
+          116
+        ]
+      },
+      "figures": [
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\stages\\attachment1_reaction_wheel_3500d_data_stage_labels.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\stages\\attachment1_reaction_wheel_3500d_data_stage_statistics.png"
+      ],
+      "result_path": "C:\\Users\\35135\\Desktop\\PHM\\results\\attachment1_reaction_wheel_3500d_data_stage_boundaries.json"
+    },
+    "attachment2_reaction_wheel_1800d_data": {
+      "boundaries": {
+        "threshold": [
+          594,
+          1260
+        ],
+        "derivative": [
+          978,
+          1446
+        ],
+        "bayesian": [
+          606,
+          1219
+        ]
+      },
+      "figures": [
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\stages\\attachment2_reaction_wheel_1800d_data_stage_labels.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\stages\\attachment2_reaction_wheel_1800d_data_stage_statistics.png"
+      ],
+      "result_path": "C:\\Users\\35135\\Desktop\\PHM\\results\\attachment2_reaction_wheel_1800d_data_stage_boundaries.json"
+    }
+  },
+  "degradation_models": {
+    "attachment1_reaction_wheel_3500d_data": {
+      "target": "current",
+      "exponential": {
+        "parameters": [
+          0.10853478565626422,
+          0.6225765353850765,
+          1.2265204687013769
+        ],
+        "metrics": {
+          "RMSE": 0.007396004225912381,
+          "MAE": 0.005886225765994979,
+          "R2": 0.9997048213769248
+        },
+        "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment1_reaction_wheel_3500d_data_current_exponential_fit.png"
+      },
+      "wiener": {
+        "drift": 0.008572571428571428,
+        "diffusion": 0.011339562607586014,
+        "metrics": {
+          "RMSE": 0.1685784384860726,
+          "MAE": 0.1540130681818181,
+          "R2": 0.8466461601817585
+        },
+        "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment1_reaction_wheel_3500d_data_current_wiener_baseline.png"
+      },
+      "lstm_baseline": {
+        "model": "torch_lstm",
+        "sequence_length": 12,
+        "metrics": {
+          "RMSE": 0.01098281020863567,
+          "MAE": 0.008450268926674666,
+          "R2": 0.9993490950732906
+        },
+        "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment1_reaction_wheel_3500d_data_current_lstm_baseline.png"
+      },
+      "result_path": "C:\\Users\\35135\\Desktop\\PHM\\results\\attachment1_reaction_wheel_3500d_data_model_metrics.json"
+    },
+    "attachment2_reaction_wheel_1800d_data": {
+      "target": "current",
+      "exponential": {
+        "parameters": [
+          0.10936401747530448,
+          0.3532752737653002,
+          1.2539848013597192
+        ],
+        "metrics": {
+          "RMSE": 0.007908420170681019,
+          "MAE": 0.006292965354412858,
+          "R2": 0.9990184252318618
+        },
+        "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment2_reaction_wheel_1800d_data_current_exponential_fit.png"
+      },
+      "wiener": {
+        "drift": 0.0004972777777777778,
+        "diffusion": 0.011237381451679768,
+        "metrics": {
+          "RMSE": 0.10808310532612404,
+          "MAE": 0.09962422302424583,
+          "R2": 0.8166590220318031
+        },
+        "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment2_reaction_wheel_1800d_data_current_wiener_baseline.png"
+      },
+      "lstm_baseline": {
+        "model": "torch_lstm",
+        "sequence_length": 12,
+        "metrics": {
+          "RMSE": 0.009661452427013028,
+          "MAE": 0.00769715382622587,
+          "R2": 0.9985350299184412
+        },
+        "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment2_reaction_wheel_1800d_data_current_lstm_baseline.png"
+      },
+      "result_path": "C:\\Users\\35135\\Desktop\\PHM\\results\\attachment2_reaction_wheel_1800d_data_model_metrics.json"
+    }
+  },
+  "bearing": {
+    "status": "XJTU-SY dataset not found yet",
+    "expected_output": "Bearing Latent Features",
+    "feature_groups": [
+      "time_domain",
+      "frequency_domain",
+      "time_frequency"
+    ],
+    "time_domain_features": [
+      "rms",
+      "peak",
+      "mean_abs",
+      "std",
+      "skewness",
+      "kurtosis",
+      "crest_factor",
+      "impulse_factor",
+      "shape_factor",
+      "margin_factor"
+    ],
+    "frequency_domain_features": [
+      "spectral_energy",
+      "spectral_centroid",
+      "spectral_entropy",
+      "band_energy_*"
+    ],
+    "time_frequency_features": [
+      "wavelet_energy_*"
+    ],
+    "metrics": [
+      "monotonicity",
+      "trendability",
+      "robustness"
+    ],
+    "downstream": [
+      "bearing_encoder",
+      "transfer_learning",
+      "shared_latent_space"
+    ]
+  }
+}

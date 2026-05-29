@@ -1,0 +1,37 @@
+project:
+  name: "Shared Latent Degradation Space PHM for Satellite Reaction Wheels"
+  random_seed: 42
+  dpi: 320
+
+paths:
+  source_data_dir: "C:/Users/35135/Desktop/数模校赛"
+  bearing_data_dir: "C:/Users/35135/Desktop/XJTU-SY"
+  project_root: "C:/Users/35135/Desktop/PHM"
+  raw_data_dir: "raw_data"
+  processed_data_dir: "processed_data"
+  figures_dir: "figures"
+  results_dir: "results"
+  reports_dir: "reports"
+  logs_dir: "logs"
+
+data:
+  supported_extensions: [".csv", ".xlsx", ".txt", ".mat", ".npy"]
+  time_candidates: ["day", "time", "timestamp", "date", "cycle"]
+  feature_candidates:
+    current: ["current", "current_theoretical"]
+    temperature: ["temperature", "temp"]
+    speed: ["speed_rpm", "speed", "rpm"]
+    friction: ["friction_torque", "torque"]
+
+analysis:
+  rolling_window_ratio: 0.08
+  max_lstm_epochs: 120
+  lstm_sequence_length: 12
+  train_ratio: 0.75
+  anomaly_z_threshold: 3.0
+  bearing_sampling_frequency: 25600.0
+
+latent_space:
+  latent_dim: 8
+  dropout: 0.15
+  n_clusters: 3

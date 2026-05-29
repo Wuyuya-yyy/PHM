@@ -1,0 +1,60 @@
+{
+  "framework": "Cross-modal Shared Latent Degradation Framework",
+  "paper_topic": "基于跨模态共享退化表征的卫星飞轮预测式健康管理研究",
+  "latent_dim": 8,
+  "datasets": [
+    {
+      "dataset": "attachment1_reaction_wheel_3500d_data",
+      "feature_dim": 19,
+      "embedding_dim": 8,
+      "embedding_path": "C:\\Users\\35135\\Desktop\\PHM\\results\\latent_space\\embeddings\\attachment1_reaction_wheel_3500d_data_flywheel_embedding.csv",
+      "cluster_path": "C:\\Users\\35135\\Desktop\\PHM\\results\\latent_space\\clustering\\attachment1_reaction_wheel_3500d_data_latent_clusters.csv",
+      "umap_status": "skipped: umap-learn is not installed",
+      "figures": [
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\latent_space\\attachment1_reaction_wheel_3500d_data_latent_trajectory_pca.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\latent_space\\attachment1_reaction_wheel_3500d_data_latent_cluster_pca.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\latent_space\\attachment1_reaction_wheel_3500d_data_latent_trajectory_tsne.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\latent_space\\attachment1_reaction_wheel_3500d_data_latent_cluster_tsne.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\latent_space\\attachment1_reaction_wheel_3500d_data_stage_separation_pca.png"
+      ]
+    },
+    {
+      "dataset": "attachment2_reaction_wheel_1800d_data",
+      "feature_dim": 15,
+      "embedding_dim": 8,
+      "embedding_path": "C:\\Users\\35135\\Desktop\\PHM\\results\\latent_space\\embeddings\\attachment2_reaction_wheel_1800d_data_flywheel_embedding.csv",
+      "cluster_path": "C:\\Users\\35135\\Desktop\\PHM\\results\\latent_space\\clustering\\attachment2_reaction_wheel_1800d_data_latent_clusters.csv",
+      "umap_status": "skipped: umap-learn is not installed",
+      "figures": [
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\latent_space\\attachment2_reaction_wheel_1800d_data_latent_trajectory_pca.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\latent_space\\attachment2_reaction_wheel_1800d_data_latent_cluster_pca.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\latent_space\\attachment2_reaction_wheel_1800d_data_latent_trajectory_tsne.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\latent_space\\attachment2_reaction_wheel_1800d_data_latent_cluster_tsne.png",
+        "C:\\Users\\35135\\Desktop\\PHM\\figures\\latent_space\\attachment2_reaction_wheel_1800d_data_stage_separation_pca.png"
+      ]
+    }
+  ],
+  "interfaces": {
+    "bearing_encoder": {
+      "input_dim": 32,
+      "latent_dim": 8,
+      "future_inputs": [
+        "RMS",
+        "Kurtosis",
+        "FFT features",
+        "Wavelet features",
+        "STFT features"
+      ]
+    },
+    "domain_classifier": "DomainClassifier(\n  (classifier): Sequential(\n    (0): Linear(in_features=8, out_features=32, bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=32, out_features=2, bias=True)\n  )\n)",
+    "dann_adapter": "DANNAdapter(\n  (domain_classifier): DomainClassifier(\n    (classifier): Sequential(\n      (0): Linear(in_features=8, out_features=32, bias=True)\n      (1): ReLU()\n      (2): Linear(in_features=32, out_features=2, bias=True)\n    )\n  )\n)",
+    "coral_example_loss": 0.0006512371473945677,
+    "mmd_example_loss": 0.4629859924316406,
+    "physics_constraints": [
+      "degradation monotonicity",
+      "temporal continuity",
+      "physical consistency"
+    ],
+    "physics_temporal_example_loss": 2.0968966484069824
+  }
+}

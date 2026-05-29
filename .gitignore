@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Notebooks and OS metadata
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+
+# Large/local raw data should not be committed by default.
+raw_data/
+checkpoints/
+models/
+
+# Logs
+logs/*.log

@@ -1,0 +1,40 @@
+{
+  "status": "XJTU-SY dataset not found yet",
+  "expected_output": "Bearing Latent Features",
+  "feature_groups": [
+    "time_domain",
+    "frequency_domain",
+    "time_frequency"
+  ],
+  "time_domain_features": [
+    "rms",
+    "peak",
+    "mean_abs",
+    "std",
+    "skewness",
+    "kurtosis",
+    "crest_factor",
+    "impulse_factor",
+    "shape_factor",
+    "margin_factor"
+  ],
+  "frequency_domain_features": [
+    "spectral_energy",
+    "spectral_centroid",
+    "spectral_entropy",
+    "band_energy_*"
+  ],
+  "time_frequency_features": [
+    "wavelet_energy_*"
+  ],
+  "metrics": [
+    "monotonicity",
+    "trendability",
+    "robustness"
+  ],
+  "downstream": [
+    "bearing_encoder",
+    "transfer_learning",
+    "shared_latent_space"
+  ]
+}
