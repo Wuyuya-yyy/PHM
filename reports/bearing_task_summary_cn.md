@@ -1,87 +1,317 @@
-# XJTU-SY 轴承建模任务总结报告
+# Phase 2 实验报告：XJTU-SY 轴承退化表征系统
 
-## 1. 队友当前进度
+## 1. 任务目标
 
-队友已完成卫星飞轮 PHM 主框架的整合，项目现在包含数据扫描、探索性分析、健康指标构建、退化阶段划分、退化建模、报告生成，以及共享潜变量空间的接口。飞轮部分已经形成可复现实验流程：
+本阶段目标不是简单训练一个预测模型，而是建立面向后续跨模态共享退化表征学习的轴承退化表征系统。该系统需要从 XJTU-SY 高速轴承振动数据中提取可解释退化特征，构建 Bearing Health Index，完成退化阶段划分，并输出可供迁移学习使用的 latent features。
 
-- 附件 1：3500 d 反作用飞轮数据，主要特征为电流、温度、摩擦力矩和转速。
-- 附件 2：1800 d 反作用飞轮数据，主要特征为电流、温度和转速。
-- 健康指标采用方向一致化归一化加 PCA 一维融合。
-- 推荐采用 Bayesian-style 变点结果作为退化阶段划分：附件 1 分界点为 57 和 116，附件 2 分界点为 606 和 1219。
+本阶段覆盖以下核心任务：
 
-## 2. 本次完成的数据准备
+1. XJTU-SY 数据读取。
+2. 时域特征提取。
+3. 频域特征提取。
+4. 时频域特征提取。
+5. 特征评价。
+6. 轴承 Health Index 构建。
+7. 退化阶段划分。
 
-本次将本机数据集完整解压并接入项目。XJTU-SY 轴承数据解压位置为：
+## 2. 数据读取与完整性
+
+XJTU-SY 数据集已解压并接入项目，路径为：
 
 `/Users/nightye/Desktop/数模/XJTU-SY/XJTU-SY_Bearing_Datasets`
 
-数据完整性检查结果：
+数据完整性检查结果如下：
 
-- 工况 `35Hz12kN`：616 个 CSV。
-- 工况 `37.5Hz11kN`：1566 个 CSV。
-- 工况 `40Hz10kN`：7034 个 CSV。
-- 总计：9216 个 CSV，约 11 GB。
-- 单个 CSV 包含 `Horizontal_vibration_signals` 和 `Vertical_vibration_signals` 两列振动信号。
+| 工况 | CSV 数量 |
+|---|---:|
+| 35Hz12kN | 616 |
+| 37.5Hz11kN | 1566 |
+| 40Hz10kN | 7034 |
+| 总计 | 9216 |
 
-补充压缩包 `1.zip` 已解压到：
+每个样本文件包含两路振动信号：
 
-`/Users/nightye/Desktop/数模/XJTU-SY_Supplement`
+- `Horizontal_vibration_signals`
+- `Vertical_vibration_signals`
 
-其中包含相关论文、实验照片和 MATLAB 读取示例，可用于论文背景和方法说明。
+本实验额外构造合成振动信号：
 
-## 3. 本次完成的轴承建模任务
+`resultant = sqrt(horizontal^2 + vertical^2)`
 
-原项目中的轴承模块只读取第一列振动信号，并且不能区分工况、轴承编号和样本序号。本次已将其改为面向 XJTU-SY 数据结构的完整处理流程：
+因此后续特征同时覆盖水平、垂直、合成三类通道。
 
-`工况 / 轴承编号 / 样本 CSV -> 特征提取 -> PCA-HI -> 平滑 HI -> 阶段标签 -> 轴承潜变量特征`
+## 3. 特征提取方法
 
-具体实现内容如下：
+### 3.1 时域特征
 
-- 按 `condition`、`bearing_id`、`sample_id` 保留样本身份，避免不同轴承的同名 CSV 混淆。
-- 同时处理水平振动、垂直振动和合成振动三类信号。
-- 提取时域特征：均值、RMS、标准差、峰值、峰峰值、偏度、峭度、峰值因子、脉冲因子、波形因子、裕度因子。
-- 提取频域特征：谱能量、谱质心、谱熵、主频、8 个频带能量占比。
-- 提取时频域特征：小波子带能量、小波熵、STFT 风格频带能量。
-- 对每条轴承退化试验单独构建 PCA 健康指标，保证 HI 在同一轴承寿命周期内有可比性。
-- 对 HI 进行滑动平滑，并基于分位数划分 `Healthy`、`Slow Degradation`、`Accelerated Degradation` 三类阶段标签。
-- 输出 8 维轴承潜变量特征，为后续与飞轮共享潜变量空间、迁移学习和 RUL 建模对接。
+已提取任务要求中的全部时域特征：
 
-## 4. 主要结果文件
+- RMS
+- Kurtosis
+- Skewness
+- Crest Factor
+- Peak-to-Peak
 
-本次生成的核心结果位于：
+同时保留辅助退化特征：
 
-- `results/bearing/xjtu_sy_bearing_features.csv`：轴承原始特征表，9216 行、104 列。
-- `results/bearing/xjtu_sy_bearing_hi.csv`：轴承特征和健康指标表，9216 行、108 列。
-- `results/bearing/bearing_latent_features.csv`：轴承潜变量特征表，9216 行、15 列。
-- `results/bearing/bearing_feature_summary.json`：轴承处理摘要和质量指标。
-- `figures/bearing/`：15 张轴承 HI 曲线图，每条轴承试验对应一张。
-- `reports/phase1_report.md`：完整主报告，已合并飞轮和轴承两部分结果。
+- peak
+- mean
+- mean absolute value
+- standard deviation
+- impulse factor
+- shape factor
+- margin factor
 
-本次轴承处理摘要：
+这些特征用于描述振动幅值、冲击性、分布非对称性和故障冲击增强现象。
 
-- 处理状态：`processed`
-- 样本文件数：9216
-- 工况数：3
-- 轴承退化试验数：15
-- 潜变量表维度：9216 x 15
-- 平均 PCA 解释方差比：约 0.5681
+### 3.2 频域特征
 
-## 5. 与项目整体模型的关系
+已提取任务要求中的全部频域特征：
 
-队友完成的飞轮部分提供低频遥测退化过程，本次完成的轴承部分提供高频振动退化过程。两者虽然传感模态不同，但都被转化为统一的 PHM 表示：
+- FFT energy
+- Spectral Entropy
+- Spectral Centroid
 
-`特征序列 -> 健康指标 HI -> 退化阶段 -> 潜变量表示`
+同时提取：
 
-因此，本次轴承任务为后续共享潜变量空间提供了目标域输入 `z_b`。后续可以将飞轮潜变量 `z_f` 和轴承潜变量 `z_b` 进一步做 MMD、CORAL、对比学习或阶段一致性约束，从而支撑跨模态退化表示学习。
+- dominant frequency
+- 8 个 FFT 频带能量占比
 
-## 6. 运行与验证情况
+这些特征用于描述故障演化过程中频谱能量迁移、频谱复杂度变化和主导频率成分变化。
 
-已成功运行项目主入口：
+### 3.3 时频域特征
 
-`python3 main.py`
+已提取任务要求中的全部时频域特征：
 
-运行结果显示轴承模块状态为 `processed`，完整报告输出到：
+- Wavelet Packet Energy
+- STFT features
 
-`/Users/nightye/Desktop/PHM/reports/phase1_report.md`
+具体实现：
 
-当前环境没有安装 `torch`，因此飞轮 LSTM 基线自动回退为 AR 模型。该回退不影响本次轴承特征提取、HI 构建和潜变量输出。
+- 使用 Wavelet Packet Decomposition 得到多频带小波包能量占比。
+- 使用 STFT 得到时频矩阵，并提取 4 个频带能量占比和 STFT 总能量。
+
+时频特征用于刻画非平稳振动信号中局部冲击和频带能量随寿命演化的变化。
+
+## 4. 特征评价
+
+为满足后续跨模态共享退化表征学习的需要，本阶段对每一个候选特征进行质量评价。评价指标包括：
+
+- monotonicity：单调退化趋势。
+- trendability：与寿命时间轴的相关趋势。
+- stability：平滑稳定性和抗噪声能力。
+- transferability：不同工况、不同轴承之间趋势一致性。
+- overall_score：综合退化表征评分。
+
+特征评价结果输出到：
+
+`results/bearing/xjtu_sy_feature_quality.csv`
+
+该表共包含 114 个特征的评价结果。综合评分靠前的特征包括：
+
+| 特征 | 说明 |
+|---|---|
+| resultant_mean / resultant_mean_abs | 合成振动幅值随退化增强，趋势性较强 |
+| resultant_rms | 反映总体振动能量增长 |
+| vertical_mean_abs / vertical_rms | 垂直方向振动幅值退化敏感 |
+| horizontal_band_energy_4 | 特定频带能量迁移明显 |
+| vertical_stft_band_energy_2 | 时频局部能量变化具有退化指示性 |
+
+对应可视化图像：
+
+`figures/bearing/bearing_feature_quality_top20.png`
+
+## 5. Bearing Health Index 构建
+
+本实验按每条轴承退化试验单独构建 HI，避免不同工况和不同轴承之间的幅值尺度差异直接混合。
+
+处理流程为：
+
+`特征矩阵 -> 标准化 -> PCA 一维融合 -> 方向一致化 -> Min-Max 归一化 -> HI_smooth`
+
+其中：
+
+- `PCA_HI`：PCA 融合得到的原始健康指标。
+- `AE_HI`：预留 AutoEncoder HI 接口，目前采用 PCA-HI 作为可复现替代。
+- `HI_smooth`：平滑后的健康指标，用于阶段划分和后续迁移学习。
+
+Bearing HI 输出到：
+
+`results/bearing/xjtu_sy_bearing_hi.csv`
+
+该表规模为：
+
+- 9216 行
+- 123 列
+
+## 6. 退化阶段划分
+
+本阶段将每条轴承寿命序列按照平滑 HI 划分为三类退化阶段：
+
+- `Healthy`
+- `Slow Degradation`
+- `Accelerated Degradation`
+
+阶段标签已经写入：
+
+`results/bearing/xjtu_sy_bearing_hi.csv`
+
+全体样本阶段统计如下：
+
+| 阶段 | 样本数 |
+|---|---:|
+| Healthy | 3074 |
+| Slow Degradation | 3067 |
+| Accelerated Degradation | 3075 |
+
+15 条轴承试验分别生成了 HI 曲线和阶段散点图，位于：
+
+`figures/bearing/`
+
+## 7. Latent Features 输出
+
+为后续跨模态共享退化表征学习，本阶段输出了轴承 latent features：
+
+`results/bearing/bearing_latent_features.csv`
+
+该表规模为：
+
+- 9216 行
+- 15 列
+
+字段包括：
+
+- sample_key
+- condition
+- bearing_id
+- sample_id
+- PCA_HI
+- HI_smooth
+- stage
+- bearing_latent_1 至 bearing_latent_8
+
+该表可直接作为目标域轴承退化表征 `z_b`，后续可与飞轮遥测 latent 表征 `z_f` 做 MMD、CORAL、对比学习、阶段一致性约束或共享潜变量建模。
+
+## 8. 最终输出清单
+
+| 输出要求 | 完成状态 | 文件 |
+|---|---|---|
+| Bearing HI | 已完成 | `results/bearing/xjtu_sy_bearing_hi.csv` |
+| 特征评价结果 | 已完成 | `results/bearing/xjtu_sy_feature_quality.csv` |
+| 阶段标签 | 已完成 | `results/bearing/xjtu_sy_bearing_hi.csv` |
+| 可视化图像 | 已完成 | `figures/bearing/` |
+| Latent features | 已完成 | `results/bearing/bearing_latent_features.csv` |
+| 处理摘要 | 已完成 | `results/bearing/bearing_feature_summary.json` |
+
+## 9. 查验步骤
+
+在终端进入项目目录：
+
+```bash
+cd /Users/nightye/Desktop/PHM
+```
+
+### 9.1 查验数据是否完整
+
+```bash
+find /Users/nightye/Desktop/数模/XJTU-SY/XJTU-SY_Bearing_Datasets -type f -name "*.csv" | wc -l
+find /Users/nightye/Desktop/数模/XJTU-SY/XJTU-SY_Bearing_Datasets -type f -name "*.csv" | awk -F'/XJTU-SY_Bearing_Datasets/' '{print $2}' | cut -d/ -f1 | sort | uniq -c
+```
+
+应看到总数为 `9216`，三组工况分别为 `616`、`1566`、`7034`。
+
+### 9.2 查验特征、HI、阶段标签和 latent features
+
+```bash
+python3 - <<'PY'
+import pandas as pd
+
+files = [
+    "results/bearing/xjtu_sy_bearing_features.csv",
+    "results/bearing/xjtu_sy_feature_quality.csv",
+    "results/bearing/xjtu_sy_bearing_hi.csv",
+    "results/bearing/bearing_latent_features.csv",
+]
+
+for path in files:
+    df = pd.read_csv(path)
+    print(path, df.shape)
+
+hi = pd.read_csv("results/bearing/xjtu_sy_bearing_hi.csv")
+print(hi["stage"].value_counts())
+PY
+```
+
+应看到：
+
+- 特征表：`9216 x 119`
+- 特征评价表：`114 x 7`
+- HI 表：`9216 x 123`
+- latent features：`9216 x 15`
+- 阶段标签包含三类退化状态。
+
+### 9.3 查验必须特征是否存在
+
+```bash
+python3 - <<'PY'
+import pandas as pd
+df = pd.read_csv("results/bearing/xjtu_sy_bearing_features.csv", nrows=1)
+checks = [
+    "rms",
+    "kurtosis",
+    "skewness",
+    "crest_factor",
+    "peak_to_peak",
+    "spectral_energy",
+    "spectral_entropy",
+    "spectral_centroid",
+    "wavelet_packet_energy",
+    "stft",
+]
+for key in checks:
+    cols = [c for c in df.columns if key in c]
+    print(key, len(cols))
+PY
+```
+
+每一项数量都应大于 0。
+
+### 9.4 查验可视化图像
+
+```bash
+find figures/bearing -type f | sort
+```
+
+应看到 15 张轴承 HI 图和 1 张特征评价 Top20 图。
+
+### 9.5 重新运行 Phase 2
+
+如需重新生成 Phase 2 结果，可运行：
+
+```bash
+python3 - <<'PY'
+from pathlib import Path
+from bearing.feature_engineering import process_xjtu_sy
+
+process_xjtu_sy(
+    Path("/Users/nightye/Desktop/数模/XJTU-SY/XJTU-SY_Bearing_Datasets"),
+    Path("/Users/nightye/Desktop/PHM/results"),
+)
+PY
+```
+
+## 10. 自查结论
+
+对照你的 Phase 2 任务要求，本阶段已经完成：
+
+- XJTU-SY 数据读取。
+- 全部指定时域特征。
+- 全部指定频域特征。
+- Wavelet Packet Energy 和 STFT 时频特征。
+- 面向单调性、稳定性、可迁移性的特征评价。
+- Bearing HI 构建。
+- 三阶段退化标签划分。
+- 可视化图像。
+- 可供迁移学习使用的 latent features。
+
+结论：你的 Phase 2 轴承退化表征系统已经完成，可以进入后续跨模态共享退化表征学习阶段。

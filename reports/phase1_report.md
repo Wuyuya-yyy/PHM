@@ -118,7 +118,7 @@ Processed files: `9216`
 Operating conditions: `3`
 Bearing runs: `15`
 Latent feature shape: `[9216, 15]`
-Feature groups: `['time_domain', 'frequency_domain', 'time_frequency', 'trend/stage']`
+Feature groups: `['time_domain', 'frequency_domain', 'wavelet_packet', 'stft', 'trend/stage']`
 Channels: `['horizontal', 'vertical', 'resultant']`
 Feature table: `/Users/nightye/Desktop/PHM/results/bearing/xjtu_sy_bearing_features.csv`
 HI table: `/Users/nightye/Desktop/PHM/results/bearing/xjtu_sy_bearing_hi.csv`

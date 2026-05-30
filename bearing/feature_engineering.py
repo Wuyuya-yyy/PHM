@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 import pywt
 from scipy.fft import rfft, rfftfreq
-from scipy.signal import welch
+from scipy.signal import stft
 from scipy.stats import kurtosis, skew
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
@@ -62,20 +62,24 @@ def frequency_domain_features(signal: np.ndarray, fs: float = 25600.0, bands: in
 
 
 def time_frequency_features(signal: np.ndarray, wavelet: str = "db4", level: int = 3) -> dict[str, float]:
-    """Compute wavelet and STFT-style sub-band energy ratios."""
+    """Compute wavelet-packet and STFT sub-band energy ratios."""
     x = np.asarray(signal, dtype=float).ravel()
     max_level = pywt.dwt_max_level(len(x), pywt.Wavelet(wavelet).dec_len)
-    coeffs = pywt.wavedec(x, wavelet, level=min(level, max_level))
-    energies = np.asarray([np.sum(c**2) for c in coeffs], dtype=float)
+    wp_level = min(level, max_level)
+    packet = pywt.WaveletPacket(data=x, wavelet=wavelet, mode="symmetric", maxlevel=wp_level)
+    nodes = packet.get_level(wp_level, order="freq")
+    energies = np.asarray([np.sum(node.data**2) for node in nodes], dtype=float)
     total = float(np.sum(energies) + 1e-12)
-    out = {f"wavelet_energy_{idx}": float(value / total) for idx, value in enumerate(energies)}
+    out = {f"wavelet_packet_energy_{idx + 1}": float(value / total) for idx, value in enumerate(energies)}
     prob = energies / total
-    out["wavelet_entropy"] = float(-np.sum(prob * np.log(prob + 1e-12)))
-    _, power = welch(x - np.mean(x), nperseg=min(1024, len(x)), scaling="spectrum")
-    stft_chunks = np.array_split(power, 4)
-    stft_total = float(np.sum(power) + 1e-12)
-    for idx, chunk in enumerate(stft_chunks):
-        out[f"stft_band_energy_{idx + 1}"] = float(np.sum(chunk) / stft_total)
+    out["wavelet_packet_entropy"] = float(-np.sum(prob * np.log(prob + 1e-12)))
+    _, _, zxx = stft(x - np.mean(x), nperseg=min(1024, len(x)), noverlap=min(512, max(0, len(x) // 4)))
+    power = np.abs(zxx) ** 2
+    stft_band_power = np.asarray([np.sum(chunk) for chunk in np.array_split(power, 4, axis=0)], dtype=float)
+    stft_total = float(np.sum(stft_band_power) + 1e-12)
+    for idx in range(len(stft_band_power)):
+        out[f"stft_band_energy_{idx + 1}"] = float(stft_band_power[idx] / stft_total)
+    out["stft_total_energy"] = float(np.sum(stft_band_power))
     return out
 
 
@@ -215,6 +219,43 @@ def _construct_group_hi(feature_df: pd.DataFrame) -> tuple[pd.DataFrame, dict[st
     return hi_df, summary
 
 
+def _evaluate_features(feature_df: pd.DataFrame) -> pd.DataFrame:
+    """Score every extracted feature for degradation representation quality."""
+    feature_cols = list(_feature_matrix(feature_df).columns)
+    rows: list[dict[str, Any]] = []
+    for col in feature_cols:
+        group_scores = []
+        directions = []
+        for (condition, bearing_id), group in feature_df.groupby(["condition", "bearing_id"], sort=True):
+            series = group.sort_values("sample_id")[col].to_numpy(dtype=float)
+            metrics = quality_metrics(series)
+            direction = 0.0
+            if len(series) > 2 and np.std(series) > 0:
+                direction = float(np.corrcoef(np.arange(len(series), dtype=float), series)[0, 1])
+            group_scores.append(metrics)
+            directions.append(direction)
+        if not group_scores:
+            continue
+        monotonicity = float(np.mean([item["monotonicity"] for item in group_scores]))
+        trendability = float(np.mean([item["trendability"] for item in group_scores]))
+        robustness = float(np.mean([item["robustness"] for item in group_scores]))
+        transferability = float(1.0 - np.std([item["trendability"] for item in group_scores]))
+        transferability = float(np.clip(transferability, 0.0, 1.0))
+        overall = 0.35 * monotonicity + 0.30 * trendability + 0.20 * robustness + 0.15 * transferability
+        rows.append(
+            {
+                "feature": col,
+                "monotonicity": monotonicity,
+                "trendability": trendability,
+                "stability": robustness,
+                "transferability": transferability,
+                "degradation_direction": "increasing" if np.nanmean(directions) >= 0 else "decreasing",
+                "overall_score": float(overall),
+            }
+        )
+    return pd.DataFrame(rows).sort_values("overall_score", ascending=False).reset_index(drop=True)
+
+
 def _build_latent_features(hi_df: pd.DataFrame, latent_dim: int = 8) -> pd.DataFrame:
     numeric = _feature_matrix(hi_df)
     if len(numeric) < 2 or numeric.shape[1] == 0:
@@ -258,6 +299,25 @@ def _plot_bearing_hi(hi_df: pd.DataFrame, fig_dir: Path, dpi: int = 320) -> list
     return paths
 
 
+def _plot_feature_quality(quality_df: pd.DataFrame, fig_dir: Path, dpi: int = 320, top_n: int = 20) -> str | None:
+    """Plot the top degradation-sensitive features."""
+    if quality_df.empty:
+        return None
+    fig_dir.mkdir(parents=True, exist_ok=True)
+    top = quality_df.head(top_n).iloc[::-1]
+    plt.figure(figsize=(9, 6))
+    plt.barh(top["feature"], top["overall_score"], color="#2A9D8F")
+    plt.xlabel("Overall degradation representation score")
+    plt.ylabel("Feature")
+    plt.title("Top XJTU-SY Bearing Feature Quality Scores")
+    plt.grid(axis="x", alpha=0.25)
+    out_path = fig_dir / "bearing_feature_quality_top20.png"
+    plt.tight_layout()
+    plt.savefig(out_path, dpi=dpi)
+    plt.close()
+    return str(out_path)
+
+
 def process_xjtu_sy(root: Path, out_dir: Path, fs: float = 25600.0) -> dict[str, Any]:
     """Process XJTU-SY files when present; otherwise emit schema and interface files."""
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -283,8 +343,8 @@ def process_xjtu_sy(root: Path, out_dir: Path, fs: float = 25600.0) -> dict[str,
                 "margin_factor",
             ],
             "frequency_domain_features": ["spectral_energy", "spectral_centroid", "spectral_entropy", "band_energy_*"],
-            "time_frequency_features": ["wavelet_energy_*"],
-            "metrics": ["monotonicity", "trendability", "robustness"],
+            "time_frequency_features": ["wavelet_packet_energy_*", "stft_band_energy_*"],
+            "metrics": ["monotonicity", "trendability", "stability", "transferability"],
             "downstream": ["bearing_encoder", "transfer_learning", "shared_latent_space"],
         }
         (out_dir / "bearing_latent_feature_schema.json").write_text(
@@ -295,26 +355,33 @@ def process_xjtu_sy(root: Path, out_dir: Path, fs: float = 25600.0) -> dict[str,
 
     rows = [extract_bearing_file_with_root(path, root, fs=fs) for path in files]
     feature_df = pd.DataFrame(rows).sort_values(["condition", "bearing_id", "sample_id"]).reset_index(drop=True)
+    feature_quality_df = _evaluate_features(feature_df)
     hi_df, quality_summary = _construct_group_hi(feature_df)
     latent_df = _build_latent_features(hi_df)
     bearing_out = out_dir / "bearing"
     bearing_out.mkdir(parents=True, exist_ok=True)
     feature_path = bearing_out / "xjtu_sy_bearing_features.csv"
+    feature_quality_path = bearing_out / "xjtu_sy_feature_quality.csv"
     hi_path = bearing_out / "xjtu_sy_bearing_hi.csv"
     latent_path = bearing_out / "bearing_latent_features.csv"
     summary_path = bearing_out / "bearing_feature_summary.json"
     feature_df.to_csv(feature_path, index=False)
+    feature_quality_df.to_csv(feature_quality_path, index=False)
     hi_df.to_csv(hi_path, index=False)
     latent_df.to_csv(latent_path, index=False)
     figures = _plot_bearing_hi(hi_df, out_dir.parent / "figures" / "bearing")
+    quality_figure = _plot_feature_quality(feature_quality_df, out_dir.parent / "figures" / "bearing")
+    if quality_figure:
+        figures.append(quality_figure)
     summary = {
         "status": "processed",
         "n_files": len(files),
         "n_conditions": int(feature_df["condition"].nunique()),
         "n_bearings": int(feature_df[["condition", "bearing_id"]].drop_duplicates().shape[0]),
-        "feature_groups": ["time_domain", "frequency_domain", "time_frequency", "trend/stage"],
+        "feature_groups": ["time_domain", "frequency_domain", "wavelet_packet", "stft", "trend/stage"],
         "channels": ["horizontal", "vertical", "resultant"],
         "feature_path": str(feature_path),
+        "feature_quality_path": str(feature_quality_path),
         "hi_path": str(hi_path),
         "latent_path": str(latent_path),
         "figures": figures,
