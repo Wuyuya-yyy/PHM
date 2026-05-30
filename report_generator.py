@@ -120,9 +120,16 @@ class ReportGenerator:
         if bearing_results:
             lines.append("## 8. XJTU-SY Bearing Feature Engineering")
             lines.append(f"Current status: `{bearing_results.get('status')}`")
-            lines.append(f"Expected output: `{bearing_results.get('expected_output', 'Bearing Latent Features')}`")
+            lines.append(f"Processed files: `{bearing_results.get('n_files', 0)}`")
+            lines.append(f"Operating conditions: `{bearing_results.get('n_conditions', 0)}`")
+            lines.append(f"Bearing runs: `{bearing_results.get('n_bearings', 0)}`")
+            lines.append(f"Latent feature shape: `{bearing_results.get('latent_shape', [])}`")
             lines.append(f"Feature groups: `{bearing_results.get('feature_groups', [])}`")
-            lines.append(f"Quality metrics: `{bearing_results.get('metrics', [])}`")
+            lines.append(f"Channels: `{bearing_results.get('channels', [])}`")
+            lines.append(f"Feature table: `{bearing_results.get('feature_path', '')}`")
+            lines.append(f"HI table: `{bearing_results.get('hi_path', '')}`")
+            lines.append(f"Latent table: `{bearing_results.get('latent_path', '')}`")
+            self._append_figures(lines, bearing_results.get("figures", [])[:6])
             lines.append(
                 "The bearing module provides time-domain, frequency-domain, and time-frequency degradation "
                 "features for the future Bearing Encoder and shared latent degradation space."

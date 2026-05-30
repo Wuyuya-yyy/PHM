@@ -2,16 +2,16 @@
   "target": "current",
   "exponential": {
     "parameters": [
-      0.10853478565626422,
-      0.6225765353850765,
-      1.2265204687013769
+      0.10853478574863437,
+      0.6225765345091272,
+      1.2265204697182421
     ],
     "metrics": {
-      "RMSE": 0.007396004225912381,
-      "MAE": 0.005886225765994979,
+      "RMSE": 0.007396004225912384,
+      "MAE": 0.005886225765790792,
       "R2": 0.9997048213769248
     },
-    "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment1_reaction_wheel_3500d_data_current_exponential_fit.png"
+    "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment1_reaction_wheel_3500d_data_current_exponential_fit.png"
   },
   "wiener": {
     "drift": 0.008572571428571428,
@@ -21,16 +21,16 @@
       "MAE": 0.1540130681818181,
       "R2": 0.8466461601817585
     },
-    "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment1_reaction_wheel_3500d_data_current_wiener_baseline.png"
+    "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment1_reaction_wheel_3500d_data_current_wiener_baseline.png"
   },
   "lstm_baseline": {
-    "model": "torch_lstm",
+    "model": "autoregressive_fallback",
     "sequence_length": 12,
     "metrics": {
-      "RMSE": 0.01098281020863567,
-      "MAE": 0.008450268926674666,
-      "R2": 0.9993490950732906
+      "RMSE": 0.008577192918574653,
+      "MAE": 0.006609719352617107,
+      "R2": 0.9996030087286799
     },
-    "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment1_reaction_wheel_3500d_data_current_lstm_baseline.png"
+    "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment1_reaction_wheel_3500d_data_current_lstm_baseline.png"
   }
 }

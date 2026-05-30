@@ -1,0 +1,136 @@
+{
+  "status": "processed",
+  "n_files": 9216,
+  "n_conditions": 3,
+  "n_bearings": 15,
+  "feature_groups": [
+    "time_domain",
+    "frequency_domain",
+    "time_frequency",
+    "trend/stage"
+  ],
+  "channels": [
+    "horizontal",
+    "vertical",
+    "resultant"
+  ],
+  "feature_path": "/Users/nightye/Desktop/PHM/results/bearing/xjtu_sy_bearing_features.csv",
+  "hi_path": "/Users/nightye/Desktop/PHM/results/bearing/xjtu_sy_bearing_hi.csv",
+  "latent_path": "/Users/nightye/Desktop/PHM/results/bearing/bearing_latent_features.csv",
+  "figures": [
+    "/Users/nightye/Desktop/PHM/figures/bearing/35Hz12kN_Bearing1_1_bearing_hi.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing/35Hz12kN_Bearing1_2_bearing_hi.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing/35Hz12kN_Bearing1_3_bearing_hi.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing/35Hz12kN_Bearing1_4_bearing_hi.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing/35Hz12kN_Bearing1_5_bearing_hi.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing/37.5Hz11kN_Bearing2_1_bearing_hi.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing/37.5Hz11kN_Bearing2_2_bearing_hi.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing/37.5Hz11kN_Bearing2_3_bearing_hi.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing/37.5Hz11kN_Bearing2_4_bearing_hi.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing/37.5Hz11kN_Bearing2_5_bearing_hi.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing/40Hz10kN_Bearing3_1_bearing_hi.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing/40Hz10kN_Bearing3_2_bearing_hi.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing/40Hz10kN_Bearing3_3_bearing_hi.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing/40Hz10kN_Bearing3_4_bearing_hi.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing/40Hz10kN_Bearing3_5_bearing_hi.png"
+  ],
+  "feature_quality": {
+    "per_bearing": {
+      "35Hz12kN/Bearing1_1": {
+        "monotonicity": 0.04918032786885246,
+        "trendability": 0.8241938562248462,
+        "robustness": 0.9774591502052113,
+        "n_samples": 123
+      },
+      "35Hz12kN/Bearing1_2": {
+        "monotonicity": 0.025,
+        "trendability": 0.7219189682437164,
+        "robustness": 0.9805526447046341,
+        "n_samples": 161
+      },
+      "35Hz12kN/Bearing1_3": {
+        "monotonicity": 0.3630573248407643,
+        "trendability": 0.9550779289276785,
+        "robustness": 0.981182511716776,
+        "n_samples": 158
+      },
+      "35Hz12kN/Bearing1_4": {
+        "monotonicity": 0.12396694214876033,
+        "trendability": 0.9144883095868849,
+        "robustness": 0.9809028454778367,
+        "n_samples": 122
+      },
+      "35Hz12kN/Bearing1_5": {
+        "monotonicity": 0.49019607843137253,
+        "trendability": 0.8823632191570704,
+        "robustness": 0.9665107190896354,
+        "n_samples": 52
+      },
+      "37.5Hz11kN/Bearing2_1": {
+        "monotonicity": 0.0653061224489796,
+        "trendability": 0.48749707897298655,
+        "robustness": 0.9945730169817821,
+        "n_samples": 491
+      },
+      "37.5Hz11kN/Bearing2_2": {
+        "monotonicity": 0.275,
+        "trendability": 0.9013575337298024,
+        "robustness": 0.9858360632994665,
+        "n_samples": 161
+      },
+      "37.5Hz11kN/Bearing2_3": {
+        "monotonicity": 0.06766917293233082,
+        "trendability": 0.5474112670025697,
+        "robustness": 0.9908991992957206,
+        "n_samples": 533
+      },
+      "37.5Hz11kN/Bearing2_4": {
+        "monotonicity": 0.6585365853658537,
+        "trendability": 0.9353071918030496,
+        "robustness": 0.9730674135645989,
+        "n_samples": 42
+      },
+      "37.5Hz11kN/Bearing2_5": {
+        "monotonicity": 0.23668639053254437,
+        "trendability": 0.9050889590365042,
+        "robustness": 0.9845801057442227,
+        "n_samples": 339
+      },
+      "40Hz10kN/Bearing3_1": {
+        "monotonicity": 0.02010248324793063,
+        "trendability": 0.4943837277403213,
+        "robustness": 0.9837131409075108,
+        "n_samples": 2538
+      },
+      "40Hz10kN/Bearing3_2": {
+        "monotonicity": 0.0004008016032064128,
+        "trendability": 0.9414609180769482,
+        "robustness": 0.991754523002743,
+        "n_samples": 2496
+      },
+      "40Hz10kN/Bearing3_3": {
+        "monotonicity": 0.03783783783783784,
+        "trendability": 0.6188730293460699,
+        "robustness": 0.9815546244125586,
+        "n_samples": 371
+      },
+      "40Hz10kN/Bearing3_4": {
+        "monotonicity": 0.013210039630118891,
+        "trendability": 0.3672570079964208,
+        "robustness": 0.9886489081066424,
+        "n_samples": 1515
+      },
+      "40Hz10kN/Bearing3_5": {
+        "monotonicity": 0.3274336283185841,
+        "trendability": 0.7450323461424737,
+        "robustness": 0.9843706184073998,
+        "n_samples": 114
+      }
+    },
+    "mean_pca_explained_variance_ratio": 0.5681366836816137
+  },
+  "latent_shape": [
+    9216,
+    15
+  ]
+}

@@ -1,12 +1,14 @@
 {
-  "source_dir": "C:\\Users\\35135\\Desktop\\数模校赛",
+  "source_dir": "/Users/nightye/Desktop/数模/2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理",
   "problem_pdf": [
-    "C:\\Users\\35135\\Desktop\\数模校赛\\2026数模校赛A题（27届本科生赛） 卫星飞轮的预测式“健康管理“.pdf"
+    "/Users/nightye/Desktop/数模/2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理/杭州电子科技大学数学建模竞赛参赛须知（2026）.pdf",
+    "/Users/nightye/Desktop/数模/2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理/2026数模校赛A题（27届本科生赛） 卫星飞轮的预测式“健康管理“.pdf",
+    "/Users/nightye/Desktop/数模/2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理/杭州电子科技大学数学建模竞赛 AI 工具使用管理规定（2026）.pdf"
   ],
   "data_files": [
     {
       "file_name": "附件1 reaction_wheel_3500d_data.csv",
-      "path": "C:\\Users\\35135\\Desktop\\数模校赛\\附件1 reaction_wheel_3500d_data.csv",
+      "path": "/Users/nightye/Desktop/数模/2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理/附件1 reaction_wheel_3500d_data.csv",
       "extension": ".csv",
       "shape": [
         176,
@@ -101,7 +103,7 @@
     },
     {
       "file_name": "附件2 reaction_wheel_1800d_data.csv",
-      "path": "C:\\Users\\35135\\Desktop\\数模校赛\\附件2 reaction_wheel_1800d_data.csv",
+      "path": "/Users/nightye/Desktop/数模/2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理/附件2 reaction_wheel_1800d_data.csv",
       "extension": ".csv",
       "shape": [
         1801,

@@ -1,13 +1,15 @@
 {
   "data_summary": {
-    "source_dir": "C:\\Users\\35135\\Desktop\\数模校赛",
+    "source_dir": "/Users/nightye/Desktop/数模/2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理",
     "problem_pdf": [
-      "C:\\Users\\35135\\Desktop\\数模校赛\\2026数模校赛A题（27届本科生赛） 卫星飞轮的预测式“健康管理“.pdf"
+      "/Users/nightye/Desktop/数模/2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理/杭州电子科技大学数学建模竞赛参赛须知（2026）.pdf",
+      "/Users/nightye/Desktop/数模/2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理/2026数模校赛A题（27届本科生赛） 卫星飞轮的预测式“健康管理“.pdf",
+      "/Users/nightye/Desktop/数模/2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理/杭州电子科技大学数学建模竞赛 AI 工具使用管理规定（2026）.pdf"
     ],
     "data_files": [
       {
         "file_name": "附件1 reaction_wheel_3500d_data.csv",
-        "path": "C:\\Users\\35135\\Desktop\\数模校赛\\附件1 reaction_wheel_3500d_data.csv",
+        "path": "/Users/nightye/Desktop/数模/2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理/附件1 reaction_wheel_3500d_data.csv",
         "extension": ".csv",
         "shape": [
           176,
@@ -102,7 +104,7 @@
       },
       {
         "file_name": "附件2 reaction_wheel_1800d_data.csv",
-        "path": "C:\\Users\\35135\\Desktop\\数模校赛\\附件2 reaction_wheel_1800d_data.csv",
+        "path": "/Users/nightye/Desktop/数模/2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理/附件2 reaction_wheel_1800d_data.csv",
         "extension": ".csv",
         "shape": [
           1801,
@@ -242,23 +244,23 @@
         }
       },
       "figures": [
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_missing_values.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_time_series_trends.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_current_analysis.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_temperature_analysis.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_speed_rpm_analysis.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_friction_torque_analysis.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_current_rolling_statistics.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_temperature_rolling_statistics.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_speed_rpm_rolling_statistics.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_friction_torque_rolling_statistics.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_current_fft_spectrum.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_temperature_fft_spectrum.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_friction_torque_fft_spectrum.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_current_wavelet_scalogram.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_temperature_wavelet_scalogram.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_correlation_heatmap.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment1_reaction_wheel_3500d_data_multivariate_relationships.png"
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_missing_values.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_time_series_trends.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_current_analysis.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_temperature_analysis.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_speed_rpm_analysis.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_friction_torque_analysis.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_current_rolling_statistics.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_temperature_rolling_statistics.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_speed_rpm_rolling_statistics.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_friction_torque_rolling_statistics.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_current_fft_spectrum.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_temperature_fft_spectrum.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_friction_torque_fft_spectrum.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_current_wavelet_scalogram.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_temperature_wavelet_scalogram.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_correlation_heatmap.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment1_reaction_wheel_3500d_data_multivariate_relationships.png"
       ]
     },
     "attachment2_reaction_wheel_1800d_data": {
@@ -305,20 +307,20 @@
         }
       },
       "figures": [
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_missing_values.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_time_series_trends.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_current_analysis.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_temperature_analysis.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_speed_rpm_analysis.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_current_rolling_statistics.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_temperature_rolling_statistics.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_speed_rpm_rolling_statistics.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_current_fft_spectrum.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_temperature_fft_spectrum.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_current_wavelet_scalogram.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_temperature_wavelet_scalogram.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_correlation_heatmap.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\eda\\attachment2_reaction_wheel_1800d_data_multivariate_relationships.png"
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment2_reaction_wheel_1800d_data_missing_values.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment2_reaction_wheel_1800d_data_time_series_trends.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment2_reaction_wheel_1800d_data_current_analysis.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment2_reaction_wheel_1800d_data_temperature_analysis.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment2_reaction_wheel_1800d_data_speed_rpm_analysis.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment2_reaction_wheel_1800d_data_current_rolling_statistics.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment2_reaction_wheel_1800d_data_temperature_rolling_statistics.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment2_reaction_wheel_1800d_data_speed_rpm_rolling_statistics.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment2_reaction_wheel_1800d_data_current_fft_spectrum.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment2_reaction_wheel_1800d_data_temperature_fft_spectrum.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment2_reaction_wheel_1800d_data_current_wavelet_scalogram.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment2_reaction_wheel_1800d_data_temperature_wavelet_scalogram.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment2_reaction_wheel_1800d_data_correlation_heatmap.png",
+        "/Users/nightye/Desktop/PHM/figures/eda/attachment2_reaction_wheel_1800d_data_multivariate_relationships.png"
       ]
     }
   },
@@ -332,13 +334,13 @@
           "friction_torque",
           "speed_rpm"
         ],
-        "pca_explained_variance_ratio": 0.999919989516465,
+        "pca_explained_variance_ratio": 0.9999199895164647,
         "autoencoder_interface": "reserved"
       },
-      "processed_path": "C:\\Users\\35135\\Desktop\\PHM\\processed_data\\attachment1_reaction_wheel_3500d_data_health_index.csv",
+      "processed_path": "/Users/nightye/Desktop/PHM/processed_data/attachment1_reaction_wheel_3500d_data_health_index.csv",
       "figures": [
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\hi\\attachment1_reaction_wheel_3500d_data_health_index_curve.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\hi\\attachment1_reaction_wheel_3500d_data_hi_trend_and_derivative.png"
+        "/Users/nightye/Desktop/PHM/figures/hi/attachment1_reaction_wheel_3500d_data_health_index_curve.png",
+        "/Users/nightye/Desktop/PHM/figures/hi/attachment1_reaction_wheel_3500d_data_hi_trend_and_derivative.png"
       ]
     },
     "attachment2_reaction_wheel_1800d_data": {
@@ -349,13 +351,13 @@
           "temperature",
           "speed_rpm"
         ],
-        "pca_explained_variance_ratio": 0.9999479113670362,
+        "pca_explained_variance_ratio": 0.9999479113670364,
         "autoencoder_interface": "reserved"
       },
-      "processed_path": "C:\\Users\\35135\\Desktop\\PHM\\processed_data\\attachment2_reaction_wheel_1800d_data_health_index.csv",
+      "processed_path": "/Users/nightye/Desktop/PHM/processed_data/attachment2_reaction_wheel_1800d_data_health_index.csv",
       "figures": [
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\hi\\attachment2_reaction_wheel_1800d_data_health_index_curve.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\hi\\attachment2_reaction_wheel_1800d_data_hi_trend_and_derivative.png"
+        "/Users/nightye/Desktop/PHM/figures/hi/attachment2_reaction_wheel_1800d_data_health_index_curve.png",
+        "/Users/nightye/Desktop/PHM/figures/hi/attachment2_reaction_wheel_1800d_data_hi_trend_and_derivative.png"
       ]
     }
   },
@@ -376,10 +378,10 @@
         ]
       },
       "figures": [
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\stages\\attachment1_reaction_wheel_3500d_data_stage_labels.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\stages\\attachment1_reaction_wheel_3500d_data_stage_statistics.png"
+        "/Users/nightye/Desktop/PHM/figures/stages/attachment1_reaction_wheel_3500d_data_stage_labels.png",
+        "/Users/nightye/Desktop/PHM/figures/stages/attachment1_reaction_wheel_3500d_data_stage_statistics.png"
       ],
-      "result_path": "C:\\Users\\35135\\Desktop\\PHM\\results\\attachment1_reaction_wheel_3500d_data_stage_boundaries.json"
+      "result_path": "/Users/nightye/Desktop/PHM/results/attachment1_reaction_wheel_3500d_data_stage_boundaries.json"
     },
     "attachment2_reaction_wheel_1800d_data": {
       "boundaries": {
@@ -397,10 +399,10 @@
         ]
       },
       "figures": [
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\stages\\attachment2_reaction_wheel_1800d_data_stage_labels.png",
-        "C:\\Users\\35135\\Desktop\\PHM\\figures\\stages\\attachment2_reaction_wheel_1800d_data_stage_statistics.png"
+        "/Users/nightye/Desktop/PHM/figures/stages/attachment2_reaction_wheel_1800d_data_stage_labels.png",
+        "/Users/nightye/Desktop/PHM/figures/stages/attachment2_reaction_wheel_1800d_data_stage_statistics.png"
       ],
-      "result_path": "C:\\Users\\35135\\Desktop\\PHM\\results\\attachment2_reaction_wheel_1800d_data_stage_boundaries.json"
+      "result_path": "/Users/nightye/Desktop/PHM/results/attachment2_reaction_wheel_1800d_data_stage_boundaries.json"
     }
   },
   "degradation_models": {
@@ -408,16 +410,16 @@
       "target": "current",
       "exponential": {
         "parameters": [
-          0.10853478565626422,
-          0.6225765353850765,
-          1.2265204687013769
+          0.10853478574863437,
+          0.6225765345091272,
+          1.2265204697182421
         ],
         "metrics": {
-          "RMSE": 0.007396004225912381,
-          "MAE": 0.005886225765994979,
+          "RMSE": 0.007396004225912384,
+          "MAE": 0.005886225765790792,
           "R2": 0.9997048213769248
         },
-        "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment1_reaction_wheel_3500d_data_current_exponential_fit.png"
+        "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment1_reaction_wheel_3500d_data_current_exponential_fit.png"
       },
       "wiener": {
         "drift": 0.008572571428571428,
@@ -427,34 +429,34 @@
           "MAE": 0.1540130681818181,
           "R2": 0.8466461601817585
         },
-        "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment1_reaction_wheel_3500d_data_current_wiener_baseline.png"
+        "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment1_reaction_wheel_3500d_data_current_wiener_baseline.png"
       },
       "lstm_baseline": {
-        "model": "torch_lstm",
+        "model": "autoregressive_fallback",
         "sequence_length": 12,
         "metrics": {
-          "RMSE": 0.01098281020863567,
-          "MAE": 0.008450268926674666,
-          "R2": 0.9993490950732906
+          "RMSE": 0.008577192918574653,
+          "MAE": 0.006609719352617107,
+          "R2": 0.9996030087286799
         },
-        "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment1_reaction_wheel_3500d_data_current_lstm_baseline.png"
+        "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment1_reaction_wheel_3500d_data_current_lstm_baseline.png"
       },
-      "result_path": "C:\\Users\\35135\\Desktop\\PHM\\results\\attachment1_reaction_wheel_3500d_data_model_metrics.json"
+      "result_path": "/Users/nightye/Desktop/PHM/results/attachment1_reaction_wheel_3500d_data_model_metrics.json"
     },
     "attachment2_reaction_wheel_1800d_data": {
       "target": "current",
       "exponential": {
         "parameters": [
-          0.10936401747530448,
-          0.3532752737653002,
-          1.2539848013597192
+          0.10936401750823288,
+          0.3532752734391836,
+          1.2539848020405395
         ],
         "metrics": {
-          "RMSE": 0.007908420170681019,
-          "MAE": 0.006292965354412858,
+          "RMSE": 0.007908420170681022,
+          "MAE": 0.006292965354359748,
           "R2": 0.9990184252318618
         },
-        "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment2_reaction_wheel_1800d_data_current_exponential_fit.png"
+        "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment2_reaction_wheel_1800d_data_current_exponential_fit.png"
       },
       "wiener": {
         "drift": 0.0004972777777777778,
@@ -464,59 +466,156 @@
           "MAE": 0.09962422302424583,
           "R2": 0.8166590220318031
         },
-        "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment2_reaction_wheel_1800d_data_current_wiener_baseline.png"
+        "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment2_reaction_wheel_1800d_data_current_wiener_baseline.png"
       },
       "lstm_baseline": {
-        "model": "torch_lstm",
+        "model": "autoregressive_fallback",
         "sequence_length": 12,
         "metrics": {
-          "RMSE": 0.009661452427013028,
-          "MAE": 0.00769715382622587,
-          "R2": 0.9985350299184412
+          "RMSE": 0.009309807275473722,
+          "MAE": 0.0073982047010919885,
+          "R2": 0.9986397294452513
         },
-        "figure": "C:\\Users\\35135\\Desktop\\PHM\\figures\\models\\attachment2_reaction_wheel_1800d_data_current_lstm_baseline.png"
+        "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment2_reaction_wheel_1800d_data_current_lstm_baseline.png"
       },
-      "result_path": "C:\\Users\\35135\\Desktop\\PHM\\results\\attachment2_reaction_wheel_1800d_data_model_metrics.json"
+      "result_path": "/Users/nightye/Desktop/PHM/results/attachment2_reaction_wheel_1800d_data_model_metrics.json"
     }
   },
   "bearing": {
-    "status": "XJTU-SY dataset not found yet",
-    "expected_output": "Bearing Latent Features",
+    "status": "processed",
+    "n_files": 9216,
+    "n_conditions": 3,
+    "n_bearings": 15,
     "feature_groups": [
       "time_domain",
       "frequency_domain",
-      "time_frequency"
+      "time_frequency",
+      "trend/stage"
     ],
-    "time_domain_features": [
-      "rms",
-      "peak",
-      "mean_abs",
-      "std",
-      "skewness",
-      "kurtosis",
-      "crest_factor",
-      "impulse_factor",
-      "shape_factor",
-      "margin_factor"
+    "channels": [
+      "horizontal",
+      "vertical",
+      "resultant"
     ],
-    "frequency_domain_features": [
-      "spectral_energy",
-      "spectral_centroid",
-      "spectral_entropy",
-      "band_energy_*"
+    "feature_path": "/Users/nightye/Desktop/PHM/results/bearing/xjtu_sy_bearing_features.csv",
+    "hi_path": "/Users/nightye/Desktop/PHM/results/bearing/xjtu_sy_bearing_hi.csv",
+    "latent_path": "/Users/nightye/Desktop/PHM/results/bearing/bearing_latent_features.csv",
+    "figures": [
+      "/Users/nightye/Desktop/PHM/figures/bearing/35Hz12kN_Bearing1_1_bearing_hi.png",
+      "/Users/nightye/Desktop/PHM/figures/bearing/35Hz12kN_Bearing1_2_bearing_hi.png",
+      "/Users/nightye/Desktop/PHM/figures/bearing/35Hz12kN_Bearing1_3_bearing_hi.png",
+      "/Users/nightye/Desktop/PHM/figures/bearing/35Hz12kN_Bearing1_4_bearing_hi.png",
+      "/Users/nightye/Desktop/PHM/figures/bearing/35Hz12kN_Bearing1_5_bearing_hi.png",
+      "/Users/nightye/Desktop/PHM/figures/bearing/37.5Hz11kN_Bearing2_1_bearing_hi.png",
+      "/Users/nightye/Desktop/PHM/figures/bearing/37.5Hz11kN_Bearing2_2_bearing_hi.png",
+      "/Users/nightye/Desktop/PHM/figures/bearing/37.5Hz11kN_Bearing2_3_bearing_hi.png",
+      "/Users/nightye/Desktop/PHM/figures/bearing/37.5Hz11kN_Bearing2_4_bearing_hi.png",
+      "/Users/nightye/Desktop/PHM/figures/bearing/37.5Hz11kN_Bearing2_5_bearing_hi.png",
+      "/Users/nightye/Desktop/PHM/figures/bearing/40Hz10kN_Bearing3_1_bearing_hi.png",
+      "/Users/nightye/Desktop/PHM/figures/bearing/40Hz10kN_Bearing3_2_bearing_hi.png",
+      "/Users/nightye/Desktop/PHM/figures/bearing/40Hz10kN_Bearing3_3_bearing_hi.png",
+      "/Users/nightye/Desktop/PHM/figures/bearing/40Hz10kN_Bearing3_4_bearing_hi.png",
+      "/Users/nightye/Desktop/PHM/figures/bearing/40Hz10kN_Bearing3_5_bearing_hi.png"
     ],
-    "time_frequency_features": [
-      "wavelet_energy_*"
+    "feature_quality": {
+      "per_bearing": {
+        "35Hz12kN/Bearing1_1": {
+          "monotonicity": 0.04918032786885246,
+          "trendability": 0.8241938562248462,
+          "robustness": 0.9774591502052113,
+          "n_samples": 123
+        },
+        "35Hz12kN/Bearing1_2": {
+          "monotonicity": 0.025,
+          "trendability": 0.7219189682437164,
+          "robustness": 0.9805526447046341,
+          "n_samples": 161
+        },
+        "35Hz12kN/Bearing1_3": {
+          "monotonicity": 0.3630573248407643,
+          "trendability": 0.9550779289276785,
+          "robustness": 0.981182511716776,
+          "n_samples": 158
+        },
+        "35Hz12kN/Bearing1_4": {
+          "monotonicity": 0.12396694214876033,
+          "trendability": 0.9144883095868849,
+          "robustness": 0.9809028454778367,
+          "n_samples": 122
+        },
+        "35Hz12kN/Bearing1_5": {
+          "monotonicity": 0.49019607843137253,
+          "trendability": 0.8823632191570704,
+          "robustness": 0.9665107190896354,
+          "n_samples": 52
+        },
+        "37.5Hz11kN/Bearing2_1": {
+          "monotonicity": 0.0653061224489796,
+          "trendability": 0.48749707897298655,
+          "robustness": 0.9945730169817821,
+          "n_samples": 491
+        },
+        "37.5Hz11kN/Bearing2_2": {
+          "monotonicity": 0.275,
+          "trendability": 0.9013575337298024,
+          "robustness": 0.9858360632994665,
+          "n_samples": 161
+        },
+        "37.5Hz11kN/Bearing2_3": {
+          "monotonicity": 0.06766917293233082,
+          "trendability": 0.5474112670025697,
+          "robustness": 0.9908991992957206,
+          "n_samples": 533
+        },
+        "37.5Hz11kN/Bearing2_4": {
+          "monotonicity": 0.6585365853658537,
+          "trendability": 0.9353071918030496,
+          "robustness": 0.9730674135645989,
+          "n_samples": 42
+        },
+        "37.5Hz11kN/Bearing2_5": {
+          "monotonicity": 0.23668639053254437,
+          "trendability": 0.9050889590365042,
+          "robustness": 0.9845801057442227,
+          "n_samples": 339
+        },
+        "40Hz10kN/Bearing3_1": {
+          "monotonicity": 0.02010248324793063,
+          "trendability": 0.4943837277403213,
+          "robustness": 0.9837131409075108,
+          "n_samples": 2538
+        },
+        "40Hz10kN/Bearing3_2": {
+          "monotonicity": 0.0004008016032064128,
+          "trendability": 0.9414609180769482,
+          "robustness": 0.991754523002743,
+          "n_samples": 2496
+        },
+        "40Hz10kN/Bearing3_3": {
+          "monotonicity": 0.03783783783783784,
+          "trendability": 0.6188730293460699,
+          "robustness": 0.9815546244125586,
+          "n_samples": 371
+        },
+        "40Hz10kN/Bearing3_4": {
+          "monotonicity": 0.013210039630118891,
+          "trendability": 0.3672570079964208,
+          "robustness": 0.9886489081066424,
+          "n_samples": 1515
+        },
+        "40Hz10kN/Bearing3_5": {
+          "monotonicity": 0.3274336283185841,
+          "trendability": 0.7450323461424737,
+          "robustness": 0.9843706184073998,
+          "n_samples": 114
+        }
+      },
+      "mean_pca_explained_variance_ratio": 0.5681366836816137
+    },
+    "latent_shape": [
+      9216,
+      15
     ],
-    "metrics": [
-      "monotonicity",
-      "trendability",
-      "robustness"
-    ],
-    "downstream": [
-      "bearing_encoder",
-      "transfer_learning",
-      "shared_latent_space"
-    ]
+    "summary_path": "/Users/nightye/Desktop/PHM/results/bearing/bearing_feature_summary.json"
   }
 }

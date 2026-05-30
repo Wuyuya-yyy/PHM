@@ -4,7 +4,7 @@
 This report establishes the first-stage engineering baseline for predictive health management of satellite reaction wheels. The workflow includes automatic data profiling, degradation-oriented exploratory analysis, interpretable health index construction, stage segmentation, and initial physical/data-driven degradation modeling.
 
 ## 1. Data Description
-Source directory: `C:\Users\35135\Desktop\数模校赛`
+Source directory: `/Users/nightye/Desktop/数模/2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理`
 
 - `附件1 reaction_wheel_3500d_data.csv`: shape=[176, 6], columns=['day', 'current', 'current_theoretical', 'temperature', 'speed_rpm', 'friction_torque']
 - `附件2 reaction_wheel_1800d_data.csv`: shape=[1801, 5], columns=['day', 'current', 'current_theoretical', 'temperature', 'speed_rpm']
@@ -85,24 +85,24 @@ Stage boundaries: `{'threshold': [594, 1260], 'derivative': [978, 1446], 'bayesi
 The physical model uses `i(t)=i0+a(exp(bt)-1)`. Data-driven baselines include Wiener drift and LSTM prediction.
 ### attachment1_reaction_wheel_3500d_data
 Target variable: `current`
-- exponential: metrics=`{'RMSE': 0.007396004225912381, 'MAE': 0.005886225765994979, 'R2': 0.9997048213769248}`
+- exponential: metrics=`{'RMSE': 0.007396004225912384, 'MAE': 0.005886225765790792, 'R2': 0.9997048213769248}`
 ![Attachment1 Reaction Wheel 3500D Data Current Exponential Fit](../figures/models/attachment1_reaction_wheel_3500d_data_current_exponential_fit.png)
 
 - wiener: metrics=`{'RMSE': 0.1685784384860726, 'MAE': 0.1540130681818181, 'R2': 0.8466461601817585}`
 ![Attachment1 Reaction Wheel 3500D Data Current Wiener Baseline](../figures/models/attachment1_reaction_wheel_3500d_data_current_wiener_baseline.png)
 
-- lstm_baseline: metrics=`{'RMSE': 0.01098281020863567, 'MAE': 0.008450268926674666, 'R2': 0.9993490950732906}`
+- lstm_baseline: metrics=`{'RMSE': 0.008577192918574653, 'MAE': 0.006609719352617107, 'R2': 0.9996030087286799}`
 ![Attachment1 Reaction Wheel 3500D Data Current Lstm Baseline](../figures/models/attachment1_reaction_wheel_3500d_data_current_lstm_baseline.png)
 
 ### attachment2_reaction_wheel_1800d_data
 Target variable: `current`
-- exponential: metrics=`{'RMSE': 0.007908420170681019, 'MAE': 0.006292965354412858, 'R2': 0.9990184252318618}`
+- exponential: metrics=`{'RMSE': 0.007908420170681022, 'MAE': 0.006292965354359748, 'R2': 0.9990184252318618}`
 ![Attachment2 Reaction Wheel 1800D Data Current Exponential Fit](../figures/models/attachment2_reaction_wheel_1800d_data_current_exponential_fit.png)
 
 - wiener: metrics=`{'RMSE': 0.10808310532612404, 'MAE': 0.09962422302424583, 'R2': 0.8166590220318031}`
 ![Attachment2 Reaction Wheel 1800D Data Current Wiener Baseline](../figures/models/attachment2_reaction_wheel_1800d_data_current_wiener_baseline.png)
 
-- lstm_baseline: metrics=`{'RMSE': 0.009661452427013028, 'MAE': 0.00769715382622587, 'R2': 0.9985350299184412}`
+- lstm_baseline: metrics=`{'RMSE': 0.009309807275473722, 'MAE': 0.0073982047010919885, 'R2': 0.9986397294452513}`
 ![Attachment2 Reaction Wheel 1800D Data Current Lstm Baseline](../figures/models/attachment2_reaction_wheel_1800d_data_current_lstm_baseline.png)
 
 
@@ -113,8 +113,26 @@ At this stage, RUL analysis is based on monotonic HI progression and degradation
 The project reserves modular interfaces for XJTU-SY bearing feature extraction, transfer learning, multimodal fusion, shared latent degradation space learning, Transformer-based forecasting, attention mechanisms, and probabilistic warning.
 
 ## 8. XJTU-SY Bearing Feature Engineering
-Current status: `XJTU-SY dataset not found yet`
-Expected output: `Bearing Latent Features`
-Feature groups: `['time_domain', 'frequency_domain', 'time_frequency']`
-Quality metrics: `['monotonicity', 'trendability', 'robustness']`
+Current status: `processed`
+Processed files: `9216`
+Operating conditions: `3`
+Bearing runs: `15`
+Latent feature shape: `[9216, 15]`
+Feature groups: `['time_domain', 'frequency_domain', 'time_frequency', 'trend/stage']`
+Channels: `['horizontal', 'vertical', 'resultant']`
+Feature table: `/Users/nightye/Desktop/PHM/results/bearing/xjtu_sy_bearing_features.csv`
+HI table: `/Users/nightye/Desktop/PHM/results/bearing/xjtu_sy_bearing_hi.csv`
+Latent table: `/Users/nightye/Desktop/PHM/results/bearing/bearing_latent_features.csv`
+![35Hz12Kn Bearing1 1 Bearing Hi](../figures/bearing/35Hz12kN_Bearing1_1_bearing_hi.png)
+
+![35Hz12Kn Bearing1 2 Bearing Hi](../figures/bearing/35Hz12kN_Bearing1_2_bearing_hi.png)
+
+![35Hz12Kn Bearing1 3 Bearing Hi](../figures/bearing/35Hz12kN_Bearing1_3_bearing_hi.png)
+
+![35Hz12Kn Bearing1 4 Bearing Hi](../figures/bearing/35Hz12kN_Bearing1_4_bearing_hi.png)
+
+![35Hz12Kn Bearing1 5 Bearing Hi](../figures/bearing/35Hz12kN_Bearing1_5_bearing_hi.png)
+
+![37.5Hz11Kn Bearing2 1 Bearing Hi](../figures/bearing/37.5Hz11kN_Bearing2_1_bearing_hi.png)
+
 The bearing module provides time-domain, frequency-domain, and time-frequency degradation features for the future Bearing Encoder and shared latent degradation space.

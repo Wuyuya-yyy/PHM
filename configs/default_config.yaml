@@ -4,9 +4,9 @@ project:
   dpi: 320
 
 paths:
-  source_data_dir: "C:/Users/35135/Desktop/数模校赛"
-  bearing_data_dir: "C:/Users/35135/Desktop/XJTU-SY"
-  project_root: "C:/Users/35135/Desktop/PHM"
+  source_data_dir: "/Users/nightye/Desktop/数模/2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理"
+  bearing_data_dir: "/Users/nightye/Desktop/数模/XJTU-SY/XJTU-SY_Bearing_Datasets"
+  project_root: "/Users/nightye/Desktop/PHM"
   raw_data_dir: "raw_data"
   processed_data_dir: "processed_data"
   figures_dir: "figures"
