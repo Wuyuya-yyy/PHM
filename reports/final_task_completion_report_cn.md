@@ -48,6 +48,7 @@ python3 main.py
 - 时频域特征：Wavelet Packet Energy、STFT features。
 - 特征评价：单调性、趋势性、稳定性、可迁移性、综合评分。
 - Bearing HI、阶段标签、latent features。
+- 基于 Bearing HI 建立并对比指数退化模型、Wiener 漂移模型、随机森林退化映射模型。
 
 核心文件：
 
@@ -55,8 +56,18 @@ python3 main.py
 - `results/bearing/xjtu_sy_feature_quality.csv`
 - `results/bearing/xjtu_sy_bearing_hi.csv`
 - `results/bearing/bearing_latent_features.csv`
+- `results/bearing_models/bearing_degradation_model_comparison.csv`
+- `results/bearing_models/bearing_degradation_model_summary.json`
 - `reports/bearing_task_summary_cn.md`
 - `figures/bearing/`
+- `figures/bearing_models/`
+
+轴承退化模型对比结果：
+
+- 指数模型平均 RMSE：约 `0.0937`。
+- Wiener 漂移模型平均 RMSE：约 `0.2160`。
+- 随机森林退化映射平均 RMSE：约 `0.0159`。
+- 15 条轴承退化序列中，随机森林模型均取得最低 RMSE，用作数据驱动对照模型；指数模型保留物理可解释性；Wiener 模型作为随机过程基线。
 
 ## 4. 任务三：跨领域迁移学习
 
@@ -72,7 +83,7 @@ python3 main.py
 核心结果：
 
 - 任务一无迁移 RUL：`608.6` 天。
-- 轴承迁移校准 RUL：约 `608.6 / severity_scale` 天，具体见 `results/transfer_health_management_results.json`。
+- 轴承迁移校准 RUL：约 `683.7` 天，具体见 `results/transfer_health_management_results.json`。
 - 输出迁移 RUL 对比图和跨域相似性图。
 
 核心文件：

@@ -137,7 +137,19 @@ Latent table: `/Users/nightye/Desktop/PHM/results/bearing/bearing_latent_feature
 
 The bearing module provides time-domain, frequency-domain, and time-frequency degradation features for the future Bearing Encoder and shared latent degradation space.
 
-## 9. Transfer Learning and Health Management
+## 9. XJTU-SY Bearing Degradation Model Comparison
+Processed bearing runs: `15`
+Model comparison table: `/Users/nightye/Desktop/PHM/results/bearing_models/bearing_degradation_model_comparison.csv`
+Mean metrics: `{'exponential_RMSE': 0.09368523396302139, 'wiener_RMSE': 0.21599736001125952, 'random_forest_RMSE': 0.01589681839870411, 'exponential_R2': 0.7594466267268255, 'wiener_R2': -2.3730931834590954, 'random_forest_R2': 0.9915697797377668}`
+Best model counts: `{'random_forest': 15}`
+![35Hz12Kn Bearing1 1 Degradation Model Comparison](../figures/bearing_models/35Hz12kN_Bearing1_1_degradation_model_comparison.png)
+
+![37.5Hz11Kn Bearing2 1 Degradation Model Comparison](../figures/bearing_models/37.5Hz11kN_Bearing2_1_degradation_model_comparison.png)
+
+![40Hz10Kn Bearing3 1 Degradation Model Comparison](../figures/bearing_models/40Hz10kN_Bearing3_1_degradation_model_comparison.png)
+
+
+## 10. Transfer Learning and Health Management
 Task-1 baseline RUL: `608.6` days
 Bearing-transfer calibrated RUL: `683.7` days
 Transfer RUL interval: `[542.8, 824.6]` days

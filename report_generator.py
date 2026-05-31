@@ -27,6 +27,7 @@ class ReportGenerator:
         model_results: Dict[str, Any],
         bearing_results: Dict[str, Any] | None = None,
         transfer_health_results: Dict[str, Any] | None = None,
+        bearing_model_results: Dict[str, Any] | None = None,
     ) -> Path:
         """Generate the Phase-1 analysis report.
 
@@ -136,8 +137,16 @@ class ReportGenerator:
                 "features for the future Bearing Encoder and shared latent degradation space."
             )
             lines.append("")
+        if bearing_model_results:
+            lines.append("## 9. XJTU-SY Bearing Degradation Model Comparison")
+            lines.append(f"Processed bearing runs: `{bearing_model_results.get('n_bearings')}`")
+            lines.append(f"Model comparison table: `{bearing_model_results.get('model_comparison_path')}`")
+            lines.append(f"Mean metrics: `{bearing_model_results.get('mean_metrics')}`")
+            lines.append(f"Best model counts: `{bearing_model_results.get('best_model_counts')}`")
+            self._append_figures(lines, bearing_model_results.get("figures", []))
+            lines.append("")
         if transfer_health_results:
-            lines.append("## 9. Transfer Learning and Health Management")
+            lines.append("## 10. Transfer Learning and Health Management")
             transfer = transfer_health_results.get("bearing_transfer", {})
             warning = transfer_health_results.get("warning", {})
             similarity = transfer_health_results.get("domain_similarity", {})

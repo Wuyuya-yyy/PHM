@@ -1,0 +1,21 @@
+{
+  "status": "processed",
+  "n_bearings": 15,
+  "model_comparison_path": "/Users/nightye/Desktop/PHM/results/bearing_models/bearing_degradation_model_comparison.csv",
+  "figures": [
+    "/Users/nightye/Desktop/PHM/figures/bearing_models/35Hz12kN_Bearing1_1_degradation_model_comparison.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing_models/37.5Hz11kN_Bearing2_1_degradation_model_comparison.png",
+    "/Users/nightye/Desktop/PHM/figures/bearing_models/40Hz10kN_Bearing3_1_degradation_model_comparison.png"
+  ],
+  "mean_metrics": {
+    "exponential_RMSE": 0.09368523396302139,
+    "wiener_RMSE": 0.21599736001125952,
+    "random_forest_RMSE": 0.01589681839870411,
+    "exponential_R2": 0.7594466267268255,
+    "wiener_R2": -2.3730931834590954,
+    "random_forest_R2": 0.9915697797377668
+  },
+  "best_model_counts": {
+    "random_forest": 15
+  }
+}
