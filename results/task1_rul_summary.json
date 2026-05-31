@@ -1,0 +1,149 @@
+{
+  "task": "Task 1 reaction wheel degradation modeling and health assessment",
+  "source_data_dir": "E:\\2026杭电数模校赛题目\\2026杭电数模校赛题目\\2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理",
+  "source_files": {
+    "attachment1": "E:\\2026杭电数模校赛题目\\2026杭电数模校赛题目\\2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理\\附件1 reaction_wheel_3500d_data.csv",
+    "attachment2": "E:\\2026杭电数模校赛题目\\2026杭电数模校赛题目\\2026数模校赛A题（本科生、研究生）卫星飞轮的预测式健康管理\\附件2 reaction_wheel_1800d_data.csv"
+  },
+  "stage_assessment": {
+    "recommended_method": "bayesian",
+    "boundaries": [
+      606,
+      1219
+    ],
+    "current_day": 1800.0,
+    "current_index": 1800,
+    "current_stage": "Accelerated Degradation"
+  },
+  "thresholds": {
+    "definition": "Attachment 1 full-life endpoint is used as failure reference.",
+    "measured_current_failure": 1.6139,
+    "theoretical_current_failure": 1.607245,
+    "common_hi_failure": 1.0
+  },
+  "common_hi": {
+    "feature_columns": [
+      "current",
+      "temperature"
+    ],
+    "directions": {
+      "current": "increasing",
+      "temperature": "increasing"
+    },
+    "pca_explained_variance_ratio": 0.9999828706825107,
+    "threshold_definition": "Attachment 1 full-life endpoint in A1-calibrated common-feature HI space.",
+    "failure_threshold": 1.0
+  },
+  "rul_methods": [
+    {
+      "method": "Measured current exponential",
+      "threshold": 1.6139,
+      "current_value": 1.0088,
+      "current_time": 1800.0,
+      "predicted_eol_day": 2382.670167393155,
+      "rul_days": 582.6701673931552,
+      "parameters": {
+        "y0": 0.10936401738444583,
+        "amplitude": 0.35327527439180295,
+        "rate": 1.2539848000915175,
+        "t0": 0.0,
+        "time_scale": 1800.0
+      },
+      "metrics": {
+        "RMSE": 0.007908420170681017,
+        "MAE": 0.006292965354650227,
+        "R2": 0.9990184252318618
+      },
+      "status": "ok"
+    },
+    {
+      "method": "Theoretical current exponential",
+      "threshold": 1.607245,
+      "current_value": 0.993598,
+      "current_time": 1800.0,
+      "predicted_eol_day": 2376.685568677206,
+      "rul_days": 576.685568677206,
+      "parameters": {
+        "y0": 0.10969998537454165,
+        "amplitude": 0.3500001275311214,
+        "rate": 1.2599997499029694,
+        "t0": 0.0,
+        "time_scale": 1800.0
+      },
+      "metrics": {
+        "RMSE": 2.8777121926497813e-07,
+        "MAE": 2.500596947679913e-07,
+        "R2": 0.9999999999986964
+      },
+      "status": "ok"
+    },
+    {
+      "method": "A1-calibrated common HI exponential",
+      "threshold": 1.0,
+      "current_value": 0.5696563566975805,
+      "current_time": 1800.0,
+      "predicted_eol_day": 2408.5708690154675,
+      "rul_days": 608.5708690154675,
+      "parameters": {
+        "y0": -0.006586690501200406,
+        "amplitude": 0.22621128548799505,
+        "rate": 1.267153886937274,
+        "t0": 0.0,
+        "time_scale": 1800.0
+      },
+      "metrics": {
+        "RMSE": 0.0009475518486295931,
+        "MAE": 0.0006293082548040689,
+        "R2": 0.9999668240363894
+      },
+      "status": "ok"
+    },
+    {
+      "method": "A1-calibrated common HI recent-linear",
+      "threshold": 1.0,
+      "current_value": 0.5696563566975805,
+      "current_time": 1800.0,
+      "predicted_eol_day": 2611.4503711748334,
+      "rul_days": 811.4503711748334,
+      "parameters": {
+        "slope_per_day": 0.0005306987022698916,
+        "intercept": -0.3858933230247109,
+        "window_days": 180.0
+      },
+      "metrics": {
+        "RMSE": 0.00027234079951941897,
+        "MAE": 0.00022680129299822445,
+        "R2": 0.9999035449820967
+      },
+      "status": "ok"
+    }
+  ],
+  "recommended_result": {
+    "method": "A1-calibrated common HI exponential",
+    "threshold": 1.0,
+    "current_value": 0.5696563566975805,
+    "current_time": 1800.0,
+    "predicted_eol_day": 2408.5708690154675,
+    "rul_days": 608.5708690154675,
+    "parameters": {
+      "y0": -0.006586690501200406,
+      "amplitude": 0.22621128548799505,
+      "rate": 1.267153886937274,
+      "t0": 0.0,
+      "time_scale": 1800.0
+    },
+    "metrics": {
+      "RMSE": 0.0009475518486295931,
+      "MAE": 0.0006293082548040689,
+      "R2": 0.9999668240363894
+    },
+    "status": "ok"
+  },
+  "outputs": {
+    "summary_json": "E:\\PHM\\results\\task1_rul_summary.json",
+    "prediction_csv": "E:\\PHM\\results\\task1_rul_predictions.csv",
+    "current_rul_figure": "E:\\PHM\\figures\\rul\\attachment2_current_rul_extrapolation.png",
+    "hi_rul_figure": "E:\\PHM\\figures\\rul\\attachment2_common_hi_rul_extrapolation.png",
+    "report": "E:\\PHM\\reports\\task1_completion_report.md"
+  }
+}
