@@ -620,5 +620,51 @@
       15
     ],
     "summary_path": "/Users/nightye/Desktop/PHM/results/bearing/bearing_feature_summary.json"
+  },
+  "transfer_health_management": {
+    "status": "processed",
+    "task1_baseline_source": "/Users/nightye/Desktop/PHM/results/task1_rul_summary.json",
+    "current_day": 1800.0,
+    "current_stage": "Accelerated Degradation",
+    "bearing_reference": {
+      "median_late_hi": 0.639998551998056,
+      "median_final_hi": 0.8100932394449041,
+      "median_normalized_slope": 0.5566063669196761,
+      "top_feature_transferability": 0.7891882599854421,
+      "top_feature_trendability": 0.6943572823908528,
+      "top_feature_score": 0.575011529251648
+    },
+    "bearing_transfer": {
+      "baseline_method": "A1-calibrated common HI exponential",
+      "baseline_rul_days": 608.5708690064148,
+      "baseline_eol_day": 2408.570869006415,
+      "baseline_current_value": 0.5696563566975805,
+      "bearing_late_hi_reference": 0.639998551998056,
+      "severity_scale": 0.8900900711700686,
+      "transfer_confidence": 0.7131620716805771,
+      "transferred_rul_days": 683.7182985385035,
+      "transferred_eol_day": 2483.7182985385034,
+      "transferred_rul_interval": [
+        542.8372006218235,
+        824.5993964551835
+      ]
+    },
+    "domain_similarity": {
+      "cosine_similarity": 0.9902167829414723,
+      "trajectory_rmse": 0.07579869824179854,
+      "trend_correlation": 0.9899418926916084
+    },
+    "warning": {
+      "level": "Level 2 - Warning",
+      "recommended_action": "进入重点监测，缩短健康评估周期，限制连续长时间高转速工作。"
+    },
+    "figures": [
+      "/Users/nightye/Desktop/PHM/figures/transfer_health/attachment2_transfer_rul_comparison.png",
+      "/Users/nightye/Desktop/PHM/figures/transfer_health/flywheel_bearing_domain_similarity.png"
+    ],
+    "outputs": {
+      "result_json": "/Users/nightye/Desktop/PHM/results/transfer_health_management_results.json",
+      "report": "/Users/nightye/Desktop/PHM/reports/health_management_report_cn.md"
+    }
   }
 }

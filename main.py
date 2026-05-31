@@ -14,6 +14,7 @@ from eda import FlywheelEDA
 from health_index import HealthIndexBuilder
 from report_generator import ReportGenerator
 from stage_segmentation import StageSegmenter
+from transfer_health_management import generate_transfer_health_management
 from utils.io_utils import ensure_directories, load_config, setup_logger, write_json
 
 
@@ -47,6 +48,8 @@ def main() -> None:
         fs=float(config["analysis"].get("bearing_sampling_frequency", 25600.0)),
     )
     logger.info("Bearing module completed with status: %s", bearing_results.get("status"))
+    transfer_health_results = generate_transfer_health_management(project_root, dpi=dpi)
+    logger.info("Transfer health-management module completed with status: %s", transfer_health_results.get("status"))
 
     all_results = {
         "data_summary": data_summary,
@@ -55,10 +58,11 @@ def main() -> None:
         "stage_segmentation": stage_results,
         "degradation_models": model_results,
         "bearing": bearing_results,
+        "transfer_health_management": transfer_health_results,
     }
     write_json(all_results, project_root / "results" / "phase1_results.json")
     report_path = ReportGenerator(project_root).generate(
-        data_summary, eda_results, hi_results, stage_results, model_results, bearing_results
+        data_summary, eda_results, hi_results, stage_results, model_results, bearing_results, transfer_health_results
     )
     logger.info("Phase-1 pipeline completed. Report: %s", report_path)
 

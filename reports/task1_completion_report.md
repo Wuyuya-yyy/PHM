@@ -39,10 +39,10 @@ Recommended RUL: **608.6 days**, corresponding to predicted EOL day **2408.6**. 
 
 ## 6. Generated Files
 
-- Summary JSON: `E:\PHM\results\task1_rul_summary.json`
-- Prediction CSV: `E:\PHM\results\task1_rul_predictions.csv`
-- Current RUL figure: `E:\PHM\figures\rul\attachment2_current_rul_extrapolation.png`
-- HI RUL figure: `E:\PHM\figures\rul\attachment2_common_hi_rul_extrapolation.png`
+- Summary JSON: `/Users/nightye/Desktop/PHM/results/task1_rul_summary.json`
+- Prediction CSV: `/Users/nightye/Desktop/PHM/results/task1_rul_predictions.csv`
+- Current RUL figure: `/Users/nightye/Desktop/PHM/figures/rul/attachment2_current_rul_extrapolation.png`
+- HI RUL figure: `/Users/nightye/Desktop/PHM/figures/rul/attachment2_common_hi_rul_extrapolation.png`
 
 ## 7. Assumptions and Limits
 

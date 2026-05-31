@@ -26,6 +26,7 @@ class ReportGenerator:
         stage_results: Dict[str, Any],
         model_results: Dict[str, Any],
         bearing_results: Dict[str, Any] | None = None,
+        transfer_health_results: Dict[str, Any] | None = None,
     ) -> Path:
         """Generate the Phase-1 analysis report.
 
@@ -134,6 +135,23 @@ class ReportGenerator:
                 "The bearing module provides time-domain, frequency-domain, and time-frequency degradation "
                 "features for the future Bearing Encoder and shared latent degradation space."
             )
+            lines.append("")
+        if transfer_health_results:
+            lines.append("## 9. Transfer Learning and Health Management")
+            transfer = transfer_health_results.get("bearing_transfer", {})
+            warning = transfer_health_results.get("warning", {})
+            similarity = transfer_health_results.get("domain_similarity", {})
+            interval = transfer.get("transferred_rul_interval", [])
+            lines.append(f"Task-1 baseline RUL: `{transfer.get('baseline_rul_days'):.1f}` days")
+            lines.append(f"Bearing-transfer calibrated RUL: `{transfer.get('transferred_rul_days'):.1f}` days")
+            if len(interval) == 2:
+                lines.append(f"Transfer RUL interval: `[{interval[0]:.1f}, {interval[1]:.1f}]` days")
+            lines.append(f"Cross-domain trajectory similarity: `{similarity.get('cosine_similarity'):.4f}`")
+            lines.append(f"Trend correlation: `{similarity.get('trend_correlation'):.4f}`")
+            lines.append(f"Current stage: `{transfer_health_results.get('current_stage')}`")
+            lines.append(f"Warning level: `{warning.get('level')}`")
+            lines.append(f"Recommended action: `{warning.get('recommended_action')}`")
+            self._append_figures(lines, transfer_health_results.get("figures", []))
             lines.append("")
         self.report_path.parent.mkdir(parents=True, exist_ok=True)
         self.report_path.write_text("\n".join(lines), encoding="utf-8")
