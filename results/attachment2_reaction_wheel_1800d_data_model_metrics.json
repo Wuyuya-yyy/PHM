@@ -24,12 +24,12 @@
     "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment2_reaction_wheel_1800d_data_current_wiener_baseline.png"
   },
   "lstm_baseline": {
-    "model": "autoregressive_fallback",
+    "model": "torch_lstm",
     "sequence_length": 12,
     "metrics": {
-      "RMSE": 0.009309807275473722,
-      "MAE": 0.0073982047010919885,
-      "R2": 0.9986397294452513
+      "RMSE": 0.009661457539193601,
+      "MAE": 0.007697158579539088,
+      "R2": 0.9985350283681167
     },
     "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment2_reaction_wheel_1800d_data_current_lstm_baseline.png"
   }

@@ -432,12 +432,12 @@
         "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment1_reaction_wheel_3500d_data_current_wiener_baseline.png"
       },
       "lstm_baseline": {
-        "model": "autoregressive_fallback",
+        "model": "torch_lstm",
         "sequence_length": 12,
         "metrics": {
-          "RMSE": 0.008577192918574653,
-          "MAE": 0.006609719352617107,
-          "R2": 0.9996030087286799
+          "RMSE": 0.010982815528520781,
+          "MAE": 0.008450276377255263,
+          "R2": 0.999349094442716
         },
         "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment1_reaction_wheel_3500d_data_current_lstm_baseline.png"
       },
@@ -469,12 +469,12 @@
         "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment2_reaction_wheel_1800d_data_current_wiener_baseline.png"
       },
       "lstm_baseline": {
-        "model": "autoregressive_fallback",
+        "model": "torch_lstm",
         "sequence_length": 12,
         "metrics": {
-          "RMSE": 0.009309807275473722,
-          "MAE": 0.0073982047010919885,
-          "R2": 0.9986397294452513
+          "RMSE": 0.009661457539193601,
+          "MAE": 0.007697158579539088,
+          "R2": 0.9985350283681167
         },
         "figure": "/Users/nightye/Desktop/PHM/figures/models/attachment2_reaction_wheel_1800d_data_current_lstm_baseline.png"
       },
@@ -780,5 +780,157 @@
       "report": "/Users/nightye/Desktop/PHM/reports/health_management_report_cn.md",
       "task3_report": "/Users/nightye/Desktop/PHM/reports/task3_transfer_report_cn.md"
     }
+  },
+  "deep_domain_adaptation": {
+    "status": "processed",
+    "method": "trained_deep_domain_adaptation",
+    "config": {
+      "latent_dim": 8,
+      "hidden_dim": 32,
+      "batch_size": 64,
+      "epochs": 260,
+      "learning_rate": 0.001,
+      "train_progress_limit": 0.7,
+      "random_seed": 2026,
+      "align_weight": 0.2,
+      "recon_weight": 0.05,
+      "domain_weight": 0.12,
+      "max_bearing_rows": 6000
+    },
+    "validation_design": {
+      "known_life_dataset": "Attachment 1",
+      "train_progress_limit": 0.7,
+      "test_progress_range": [
+        0.7,
+        1.0
+      ],
+      "metric": "RUL prediction error on held-out A1 full-life tail"
+    },
+    "flywheel_features": [
+      "current_norm",
+      "temperature_norm",
+      "speed_rpm_norm",
+      "HI_common_raw",
+      "HI_common_smooth",
+      "HI_common_derivative"
+    ],
+    "bearing_features": [
+      "resultant_mean",
+      "resultant_mean_abs",
+      "resultant_rms",
+      "vertical_mean_abs",
+      "horizontal_band_energy_4",
+      "vertical_rms",
+      "vertical_std",
+      "horizontal_mean_abs",
+      "resultant_std",
+      "vertical_stft_band_energy_2",
+      "horizontal_std",
+      "horizontal_rms",
+      "vertical_band_energy_3",
+      "resultant_band_energy_4",
+      "vertical_wavelet_packet_energy_3",
+      "horizontal_wavelet_packet_energy_4",
+      "vertical_stft_total_energy",
+      "horizontal_stft_band_energy_2",
+      "resultant_stft_band_energy_2",
+      "resultant_stft_total_energy",
+      "vertical_spectral_energy",
+      "resultant_spectral_energy",
+      "vertical_band_energy_4",
+      "resultant_band_energy_5",
+      "resultant_band_energy_3",
+      "horizontal_stft_total_energy",
+      "horizontal_spectral_energy",
+      "resultant_wavelet_packet_energy_5",
+      "PCA_HI",
+      "HI_smooth"
+    ],
+    "method_summary": [
+      {
+        "method": "mmd",
+        "test_mae_days": 87.23689495909426,
+        "test_rmse_days": 101.60474722837878,
+        "test_mape": 3.638340337418581,
+        "a2_predicted_progress": 0.8150449991226196,
+        "a2_predicted_eol_day": 2208.4670195359345,
+        "a2_predicted_rul_days": 408.46701953593447,
+        "centroid_distance": 0.5951496362686157,
+        "coral_distance": 0.0002550426288507879,
+        "mmd_distance": 0.38613224029541016
+      },
+      {
+        "method": "autoencoder_joint",
+        "test_mae_days": 117.06027859061842,
+        "test_rmse_days": 141.65211821547217,
+        "test_mape": 5.521840915299442,
+        "a2_predicted_progress": 0.8266575336456299,
+        "a2_predicted_eol_day": 2177.4434112538083,
+        "a2_predicted_rul_days": 377.44341125380834,
+        "centroid_distance": 0.570809006690979,
+        "coral_distance": 0.0010594702325761318,
+        "mmd_distance": 0.43286824226379395
+      },
+      {
+        "method": "no_adaptation",
+        "test_mae_days": 154.2124715627117,
+        "test_rmse_days": 173.97156731541432,
+        "test_mape": 7.294942394783838,
+        "a2_predicted_progress": 0.9379982948303223,
+        "a2_predicted_eol_day": 1918.980034314037,
+        "a2_predicted_rul_days": 118.98003431403708,
+        "centroid_distance": 0.8628460168838501,
+        "coral_distance": 0.0202602818608284,
+        "mmd_distance": 0.8747110366821289
+      },
+      {
+        "method": "dann",
+        "test_mae_days": 167.66427241785306,
+        "test_rmse_days": 199.02120730349722,
+        "test_mape": 1.8825738263392797,
+        "a2_predicted_progress": 0.05000000074505806,
+        "a2_predicted_eol_day": 8000.0,
+        "a2_predicted_rul_days": 6200.0,
+        "centroid_distance": 0.9862719774246216,
+        "coral_distance": 0.02907661348581314,
+        "mmd_distance": 1.0137536525726318
+      },
+      {
+        "method": "coral",
+        "test_mae_days": 200.0361478780648,
+        "test_rmse_days": 213.44900390388307,
+        "test_mape": 7.476168955973367,
+        "a2_predicted_progress": 0.9972900152206421,
+        "a2_predicted_eol_day": 1804.8912277556144,
+        "a2_predicted_rul_days": 4.891227755614409,
+        "centroid_distance": 0.805133044719696,
+        "coral_distance": 0.004449604079127312,
+        "mmd_distance": 0.823314905166626
+      }
+    ],
+    "best_method": {
+      "method": "mmd",
+      "test_mae_days": 87.23689495909426,
+      "test_rmse_days": 101.60474722837878,
+      "test_mape": 3.638340337418581,
+      "a2_predicted_progress": 0.8150449991226196,
+      "a2_predicted_eol_day": 2208.4670195359345,
+      "a2_predicted_rul_days": 408.46701953593447,
+      "centroid_distance": 0.5951496362686157,
+      "coral_distance": 0.0002550426288507879,
+      "mmd_distance": 0.38613224029541016
+    },
+    "outputs": {
+      "summary_json": "/Users/nightye/Desktop/PHM/results/deep_transfer/deep_transfer_summary.json",
+      "method_comparison_csv": "/Users/nightye/Desktop/PHM/results/deep_transfer/deep_transfer_method_comparison.csv",
+      "rul_point_predictions_csv": "/Users/nightye/Desktop/PHM/results/deep_transfer/deep_transfer_rul_point_predictions.csv",
+      "latent_features_csv": "/Users/nightye/Desktop/PHM/results/deep_transfer/deep_transfer_latent_features.csv",
+      "report": "/Users/nightye/Desktop/PHM/reports/deep_transfer_report_cn.md"
+    },
+    "figures": [
+      "/Users/nightye/Desktop/PHM/figures/deep_transfer/deep_transfer_rul_error_comparison.png",
+      "/Users/nightye/Desktop/PHM/figures/deep_transfer/deep_transfer_latent_distance.png",
+      "/Users/nightye/Desktop/PHM/figures/deep_transfer/deep_transfer_best_latent_pca.png"
+    ]
   }
 }

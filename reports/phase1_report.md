@@ -91,7 +91,7 @@ Target variable: `current`
 - wiener: metrics=`{'RMSE': 0.1685784384860726, 'MAE': 0.1540130681818181, 'R2': 0.8466461601817585}`
 ![Attachment1 Reaction Wheel 3500D Data Current Wiener Baseline](../figures/models/attachment1_reaction_wheel_3500d_data_current_wiener_baseline.png)
 
-- lstm_baseline: metrics=`{'RMSE': 0.008577192918574653, 'MAE': 0.006609719352617107, 'R2': 0.9996030087286799}`
+- lstm_baseline: metrics=`{'RMSE': 0.010982815528520781, 'MAE': 0.008450276377255263, 'R2': 0.999349094442716}`
 ![Attachment1 Reaction Wheel 3500D Data Current Lstm Baseline](../figures/models/attachment1_reaction_wheel_3500d_data_current_lstm_baseline.png)
 
 ### attachment2_reaction_wheel_1800d_data
@@ -102,7 +102,7 @@ Target variable: `current`
 - wiener: metrics=`{'RMSE': 0.10808310532612404, 'MAE': 0.09962422302424583, 'R2': 0.8166590220318031}`
 ![Attachment2 Reaction Wheel 1800D Data Current Wiener Baseline](../figures/models/attachment2_reaction_wheel_1800d_data_current_wiener_baseline.png)
 
-- lstm_baseline: metrics=`{'RMSE': 0.009309807275473722, 'MAE': 0.0073982047010919885, 'R2': 0.9986397294452513}`
+- lstm_baseline: metrics=`{'RMSE': 0.009661457539193601, 'MAE': 0.007697158579539088, 'R2': 0.9985350283681167}`
 ![Attachment2 Reaction Wheel 1800D Data Current Lstm Baseline](../figures/models/attachment2_reaction_wheel_1800d_data_current_lstm_baseline.png)
 
 
@@ -110,7 +110,7 @@ Target variable: `current`
 At this stage, RUL analysis is based on monotonic HI progression and degradation model extrapolation. A probabilistic RUL module is reserved under `rul_prediction/` for uncertainty-aware prediction after bearing data and cross-domain samples are added.
 
 ## 7. Extension Interfaces
-The project reserves modular interfaces for transfer learning, multimodal fusion, shared latent space learning, Transformer-based forecasting, attention mechanisms, and probabilistic warning. Reserved DANN, CORAL, MMD, and AutoEncoder modules should not be described as completed deep domain-adaptation experiments.
+The project reserves modular interfaces for transfer learning, multimodal fusion, shared latent space learning, Transformer-based forecasting, attention mechanisms, and probabilistic warning. The enhanced pipeline also includes a trained deep domain-adaptation experiment for DANN, CORAL, MMD, and AutoEncoder-joint comparison.
 
 ## 8. XJTU-SY Bearing Feature Engineering
 Current status: `processed`
@@ -160,7 +160,7 @@ Trend correlation: `0.9899`
 Current stage: `Accelerated Degradation`
 Warning level: `Level 2 - Warning`
 Recommended action: `进入重点监测，缩短健康评估周期，限制连续长时间高转速工作。`
-Method note: the completed transfer result is physical-consistency constrained degradation severity calibration, not trained DANN/CORAL/MMD deep domain adaptation.
+Method note: this health-management recommendation is based on physical-consistency degradation severity calibration; trained deep-transfer outputs are reported separately as a conservative validation reference.
 ![Attachment2 Transfer Rul Comparison](../figures/transfer_health/attachment2_transfer_rul_comparison.png)
 
 ![Flywheel Bearing Domain Similarity](../figures/transfer_health/flywheel_bearing_domain_similarity.png)
@@ -170,4 +170,18 @@ Method note: the completed transfer result is physical-consistency constrained d
 ![Task3 Transfer Comparison](../figures/transfer_health/task3_transfer_comparison.png)
 
 ![Task3 Sensitivity](../figures/transfer_health/task3_sensitivity.png)
+
+
+## 11. Trained Deep Domain Adaptation
+Trained methods: `no_adaptation`, `CORAL`, `MMD`, `DANN`, and `AutoEncoder-joint`.
+Validation uses the known Attachment-1 full-life trajectory: the first 70% is used for training and the last 30% is used for real RUL error testing.
+Best trained method: `mmd`
+Best A1 held-out RUL MAE: `87.2` days
+Best A2 deep-transfer reference RUL: `408.5` days
+Deep-transfer report: `/Users/nightye/Desktop/PHM/reports/deep_transfer_report_cn.md`
+![Deep Transfer Rul Error Comparison](../figures/deep_transfer/deep_transfer_rul_error_comparison.png)
+
+![Deep Transfer Latent Distance](../figures/deep_transfer/deep_transfer_latent_distance.png)
+
+![Deep Transfer Best Latent Pca](../figures/deep_transfer/deep_transfer_best_latent_pca.png)
 

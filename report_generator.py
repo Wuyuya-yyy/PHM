@@ -28,6 +28,7 @@ class ReportGenerator:
         bearing_results: Dict[str, Any] | None = None,
         transfer_health_results: Dict[str, Any] | None = None,
         bearing_model_results: Dict[str, Any] | None = None,
+        deep_transfer_results: Dict[str, Any] | None = None,
     ) -> Path:
         """Generate the Phase-1 analysis report.
 
@@ -116,8 +117,8 @@ class ReportGenerator:
         lines.append(
             "The project reserves modular interfaces for transfer learning, multimodal fusion, shared latent "
             "space learning, Transformer-based forecasting, attention mechanisms, and probabilistic warning. "
-            "Reserved DANN, CORAL, MMD, and AutoEncoder modules should not be described as completed deep "
-            "domain-adaptation experiments."
+            "The enhanced pipeline also includes a trained deep domain-adaptation experiment for DANN, CORAL, "
+            "MMD, and AutoEncoder-joint comparison."
         )
         lines.append("")
         if bearing_results:
@@ -171,10 +172,25 @@ class ReportGenerator:
             lines.append(f"Warning level: `{warning.get('level')}`")
             lines.append(f"Recommended action: `{warning.get('recommended_action')}`")
             lines.append(
-                "Method note: the completed transfer result is physical-consistency constrained degradation "
-                "severity calibration, not trained DANN/CORAL/MMD deep domain adaptation."
+                "Method note: this health-management recommendation is based on physical-consistency "
+                "degradation severity calibration; trained deep-transfer outputs are reported separately "
+                "as a conservative validation reference."
             )
             self._append_figures(lines, transfer_health_results.get("figures", []))
+            lines.append("")
+        if deep_transfer_results:
+            lines.append("## 11. Trained Deep Domain Adaptation")
+            best = deep_transfer_results.get("best_method", {})
+            lines.append("Trained methods: `no_adaptation`, `CORAL`, `MMD`, `DANN`, and `AutoEncoder-joint`.")
+            lines.append(
+                "Validation uses the known Attachment-1 full-life trajectory: the first 70% is used for "
+                "training and the last 30% is used for real RUL error testing."
+            )
+            lines.append(f"Best trained method: `{best.get('method')}`")
+            lines.append(f"Best A1 held-out RUL MAE: `{best.get('test_mae_days'):.1f}` days")
+            lines.append(f"Best A2 deep-transfer reference RUL: `{best.get('a2_predicted_rul_days'):.1f}` days")
+            lines.append(f"Deep-transfer report: `{deep_transfer_results.get('outputs', {}).get('report', '')}`")
+            self._append_figures(lines, deep_transfer_results.get("figures", []))
             lines.append("")
         self.report_path.parent.mkdir(parents=True, exist_ok=True)
         self.report_path.write_text("\n".join(lines), encoding="utf-8")

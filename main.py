@@ -11,6 +11,7 @@ from bearing_degradation_modeling import run_bearing_degradation_modeling
 from bearing.feature_engineering import process_xjtu_sy
 from data_scanner import DataScanner
 from degradation_models import DegradationModeler
+from deep_domain_adaptation import run_deep_domain_adaptation
 from eda import FlywheelEDA
 from health_index import HealthIndexBuilder
 from report_generator import ReportGenerator
@@ -53,6 +54,8 @@ def main() -> None:
     logger.info("Bearing degradation modeling completed with status: %s", bearing_model_results.get("status"))
     transfer_health_results = generate_transfer_health_management(project_root, dpi=dpi)
     logger.info("Transfer health-management module completed with status: %s", transfer_health_results.get("status"))
+    deep_transfer_results = run_deep_domain_adaptation(project_root, dpi=dpi)
+    logger.info("Deep domain-adaptation module completed with status: %s", deep_transfer_results.get("status"))
 
     all_results = {
         "data_summary": data_summary,
@@ -63,6 +66,7 @@ def main() -> None:
         "bearing": bearing_results,
         "bearing_degradation_models": bearing_model_results,
         "transfer_health_management": transfer_health_results,
+        "deep_domain_adaptation": deep_transfer_results,
     }
     write_json(all_results, project_root / "results" / "phase1_results.json")
     report_path = ReportGenerator(project_root).generate(
@@ -74,6 +78,7 @@ def main() -> None:
         bearing_results,
         transfer_health_results,
         bearing_model_results,
+        deep_transfer_results,
     )
     logger.info("Phase-1 pipeline completed. Report: %s", report_path)
 

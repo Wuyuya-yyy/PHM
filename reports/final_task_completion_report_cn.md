@@ -81,7 +81,7 @@ python3 main.py
 4. 对比无迁移、严重度迁移、阶段比例迁移、综合迁移四种 RUL。
 5. 对综合迁移系数做 `±5%`、`±10%` 敏感性分析。
 
-需要明确：当前任务三采用的是“物理一致性约束下的退化严重度迁移校准”，不是 DANN/CORAL/MMD 深度域适配训练。仓库中的 DANN、CORAL、MMD、AutoEncoder 是预留接口，不能在论文中写成已经完成了对抗训练、协方差对齐训练、MMD 最小化训练或深度 AutoEncoder 跨域联合训练。
+在增强版本中，另补充了真正的 PyTorch 深度域适配训练流程：`no_adaptation`、`CORAL`、`MMD`、`DANN`、`AutoEncoder-joint`。验证方式为使用附件 1 已知全寿命数据，前 70% 训练、后 30% 做真实 RUL 误差测试。
 
 核心结果：
 
@@ -91,6 +91,8 @@ python3 main.py
 - 综合迁移推荐 RUL：`690.0` 天。
 - 推荐 RUL 区间：`627.3 - 766.7` 天。
 - 已输出迁移 RUL 对比图、跨域相似性图和敏感性分析图。
+- 深度域适配实验中，`MMD` 方法取得最佳附件 1 后 30% RUL 测试 MAE，约 `87.2` 天；`no_adaptation` MAE 约 `154.2` 天，说明训练式分布对齐能降低验证误差。
+- MMD 对附件 2 给出的深度模型参考 RUL 约 `408.5` 天，作为保守对照，不直接替代综合迁移推荐 RUL。
 
 核心文件：
 
@@ -100,11 +102,19 @@ python3 main.py
 - `results/task3_transfer_comparison.csv`
 - `results/task3_transfer_sensitivity.csv`
 - `results/task3_transfer_summary.json`
+- `results/deep_transfer/deep_transfer_summary.json`
+- `results/deep_transfer/deep_transfer_method_comparison.csv`
+- `results/deep_transfer/deep_transfer_rul_point_predictions.csv`
+- `results/deep_transfer/deep_transfer_latent_features.csv`
 - `figures/transfer_health/attachment2_transfer_rul_comparison.png`
 - `figures/transfer_health/flywheel_bearing_domain_similarity.png`
 - `figures/transfer_health/observed_domain_similarity.png`
 - `figures/transfer_health/task3_transfer_comparison.png`
 - `figures/transfer_health/task3_sensitivity.png`
+- `figures/deep_transfer/deep_transfer_rul_error_comparison.png`
+- `figures/deep_transfer/deep_transfer_latent_distance.png`
+- `figures/deep_transfer/deep_transfer_best_latent_pca.png`
+- `reports/deep_transfer_report_cn.md`
 
 ## 5. 任务四：飞轮健康管理报告
 

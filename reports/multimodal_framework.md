@@ -20,7 +20,7 @@ EEG-fMRI fusion provides the theoretical analogy only. EEG is temporally sensiti
 
 The current completed transfer experiment uses physical-consistency constrained degradation severity calibration. It compares flywheel HI and XJTU-SY bearing HI trajectories, then calibrates flywheel RUL with bearing late-life severity and stage-ratio evidence.
 
-DANN, CORAL, MMD, and deep AutoEncoder joint training are reserved interfaces only in the present repository. They have not been used as trained domain-adaptation experiments, and the current paper should not claim adversarial training, covariance-alignment training, MMD minimization training, or real-test-set error reduction from such deep transfer models.
+The enhanced repository also includes trained deep domain-adaptation experiments. The training flow is bearing features -> Bearing Encoder -> z_b, flywheel features -> Flywheel Encoder -> z_f, domain-adaptation losses -> aligned latent space, followed by RUL error comparison on the held-out tail of the known Attachment-1 full-life trajectory. In the current run, MMD improves the held-out RUL MAE relative to no-adaptation, while DANN and AutoEncoder-joint are kept as reported comparison methods rather than claimed best methods.
 
 ## 5. Current Deliverables
 
@@ -29,4 +29,5 @@ DANN, CORAL, MMD, and deep AutoEncoder joint training are reserved interfaces on
 - PCA and t-SNE trajectory plots.
 - Stage separation plots.
 - Physical-consistency transfer calibration results.
-- Reserved transfer-learning and physics-informed interfaces.
+- Trained deep-transfer comparison results.
+- Transfer-learning and physics-informed interfaces.
