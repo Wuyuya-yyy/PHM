@@ -147,6 +147,137 @@ def _transfer_calibrate(task1: dict[str, Any], bearing_ref: dict[str, Any]) -> d
     }
 
 
+def _stage_ratio_factor(task1: dict[str, Any], bearing_hi: pd.DataFrame) -> dict[str, float]:
+    """Estimate a transfer factor from the proportion of accelerated degradation."""
+    current_index = float(task1["stage_assessment"]["current_index"])
+    current_progress = current_index / max(float(task1["stage_assessment"]["current_day"]), 1.0)
+    accel_ratios = []
+    for _, group in bearing_hi.groupby(["condition", "bearing_id"], sort=True):
+        labels = group.sort_values("sample_id")["stage"].to_numpy()
+        accel = np.where(labels == "Accelerated Degradation")[0]
+        if len(accel):
+            accel_start = float(accel[0]) / max(len(labels) - 1, 1)
+            accel_ratios.append(1.0 - accel_start)
+    bearing_accel_ratio = float(np.median(accel_ratios)) if accel_ratios else 1.0 / 3.0
+    # Attachment 2 is already in accelerated degradation; a larger bearing late-stage
+    # ratio means the accelerated stage is not necessarily immediately terminal.
+    stage_factor = float(np.clip(1.0 + 0.30 * bearing_accel_ratio, 0.90, 1.20))
+    return {
+        "current_progress_proxy": current_progress,
+        "bearing_accelerated_stage_ratio_median": bearing_accel_ratio,
+        "stage_factor": stage_factor,
+    }
+
+
+def _build_transfer_comparison(task1: dict[str, Any], severity_transfer: dict[str, Any], stage_info: dict[str, float]) -> pd.DataFrame:
+    base_rul = float(severity_transfer["baseline_rul_days"])
+    severity_rul = float(severity_transfer["transferred_rul_days"])
+    stage_rul = base_rul * stage_info["stage_factor"]
+    combined_factor = (base_rul / severity_rul + 1.0 / stage_info["stage_factor"]) / 2.0
+    combined_rul = base_rul / max(combined_factor, 1e-12)
+    current_day = float(task1["stage_assessment"]["current_day"])
+    rows = [
+        {
+            "method": "no_transfer",
+            "description": "Task-1 A1-calibrated common HI baseline",
+            "transfer_factor": 1.0,
+            "rul_days": base_rul,
+            "eol_day": current_day + base_rul,
+        },
+        {
+            "method": "severity_transfer",
+            "description": "Bearing late-life HI severity calibration",
+            "transfer_factor": float(severity_transfer["severity_scale"]),
+            "rul_days": severity_rul,
+            "eol_day": current_day + severity_rul,
+        },
+        {
+            "method": "stage_ratio_transfer",
+            "description": "Bearing accelerated-stage proportion calibration",
+            "transfer_factor": float(1.0 / stage_info["stage_factor"]),
+            "rul_days": stage_rul,
+            "eol_day": current_day + stage_rul,
+        },
+        {
+            "method": "combined_transfer",
+            "description": "Average of severity and stage-ratio transfer factors",
+            "transfer_factor": float(combined_factor),
+            "rul_days": float(combined_rul),
+            "eol_day": current_day + combined_rul,
+        },
+    ]
+    return pd.DataFrame(rows)
+
+
+def _build_sensitivity(comparison: pd.DataFrame) -> pd.DataFrame:
+    base = comparison[comparison["method"] == "combined_transfer"].iloc[0]
+    base_factor = float(base["transfer_factor"])
+    base_rul = float(comparison[comparison["method"] == "no_transfer"]["rul_days"].iloc[0])
+    rows = []
+    for delta in [-0.10, -0.05, 0.0, 0.05, 0.10]:
+        factor = base_factor * (1.0 + delta)
+        rows.append(
+            {
+                "factor_delta": delta,
+                "transfer_factor": factor,
+                "rul_days": base_rul / factor,
+                "rul_change_vs_nominal_days": base_rul / factor - float(base["rul_days"]),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def _observed_similarity(project_root: Path, bearing_ref: dict[str, Any], task1_predictions: pd.DataFrame, dpi: int) -> tuple[dict[str, float], str]:
+    observed = task1_predictions[task1_predictions["day"] <= 1800]["common_hi_exp"].to_numpy(dtype=float)
+    flywheel_curve = _resample_curve(observed)
+    bearing_curve = bearing_ref["mean_curve"]
+    similarity = {
+        "observed_days": 1800,
+        "cosine_similarity": float(cosine_similarity(flywheel_curve.reshape(1, -1), bearing_curve.reshape(1, -1))[0, 0]),
+        "trajectory_rmse": float(np.sqrt(np.mean((flywheel_curve - bearing_curve) ** 2))),
+        "trend_correlation": float(np.corrcoef(flywheel_curve, bearing_curve)[0, 1]),
+    }
+
+    _set_plot_style()
+    plt.figure(figsize=(6.4, 4.0))
+    x = np.linspace(0, 1, len(flywheel_curve))
+    plt.plot(x, flywheel_curve, color="#2B6CB0", linewidth=1.8, label="Flywheel observed 0-1800d")
+    plt.plot(x, bearing_curve, color="#D1495B", linewidth=1.8, label="Bearing full-life mean")
+    plt.xlabel("Normalized observed progress")
+    plt.ylabel("Normalized HI")
+    plt.title("Observed-domain Similarity: Flywheel 0-1800d vs Bearing")
+    plt.legend()
+    path = project_root / "figures" / "transfer_health" / "observed_domain_similarity.png"
+    return similarity, _save_figure(path, dpi=dpi)
+
+
+def _plot_transfer_comparison(project_root: Path, comparison: pd.DataFrame, dpi: int) -> str:
+    _set_plot_style()
+    plt.figure(figsize=(6.6, 3.8))
+    colors = ["#4A5568", "#D1495B", "#2A9D8F", "#2B6CB0"]
+    plt.bar(comparison["method"], comparison["rul_days"], color=colors)
+    plt.ylabel("RUL / days")
+    plt.title("Task 3 RUL Comparison Across Transfer Strategies")
+    plt.xticks(rotation=18, ha="right")
+    for idx, value in enumerate(comparison["rul_days"]):
+        plt.text(idx, value, f"{value:.1f}", ha="center", va="bottom", fontsize=8)
+    path = project_root / "figures" / "transfer_health" / "task3_transfer_comparison.png"
+    plt.tight_layout()
+    return _save_figure(path, dpi=dpi)
+
+
+def _plot_sensitivity(project_root: Path, sensitivity: pd.DataFrame, dpi: int) -> str:
+    _set_plot_style()
+    plt.figure(figsize=(6.4, 3.8))
+    plt.plot(100 * sensitivity["factor_delta"], sensitivity["rul_days"], marker="o", color="#D1495B", linewidth=1.4)
+    plt.xlabel("Transfer coefficient perturbation / %")
+    plt.ylabel("Combined-transfer RUL / days")
+    plt.title("Task 3 Sensitivity to Transfer Coefficient")
+    path = project_root / "figures" / "transfer_health" / "task3_sensitivity.png"
+    plt.tight_layout()
+    return _save_figure(path, dpi=dpi)
+
+
 def _warning_level(stage: str, hi: float, rul_days: float) -> dict[str, str]:
     if stage == "Accelerated Degradation" and (hi >= 0.85 or rul_days <= 365):
         return {
@@ -234,29 +365,36 @@ def _write_health_report(project_root: Path, result: dict[str, Any], feature_qua
         "",
         f"附件 2 当前观测至第 `{result['current_day']:.0f}` 天，任务一判定当前阶段为 `{result['current_stage']}`。",
         f"任务一 A1-calibrated common HI 当前值为 `{transfer['baseline_current_value']:.4f}`，无迁移推荐 RUL 为 `{transfer['baseline_rul_days']:.1f}` 天。",
-        f"结合轴承迁移校准后，RUL 为 `{transfer['transferred_rul_days']:.1f}` 天，区间为 `[{transfer['transferred_rul_interval'][0]:.1f}, {transfer['transferred_rul_interval'][1]:.1f}]` 天。",
+        f"结合增强后的综合迁移校准后，推荐 RUL 为 `{result['recommended_rul']['rul_days']:.1f}` 天，区间为 `[{result['recommended_rul']['rul_interval'][0]:.1f}, {result['recommended_rul']['rul_interval'][1]:.1f}]` 天。",
         f"当前预警等级为：`{warning['level']}`。",
         "",
         "## 2. 迁移学习合理性",
         "",
         "滚动轴承和反作用轮轴承具有相同的关键退化机理：润滑状态恶化导致摩擦增强，进而表现为振动能量、电流或温度等观测量上升。",
-        f"归一化寿命 HI 轨迹相似度为 `{result['domain_similarity']['cosine_similarity']:.4f}`，趋势相关系数为 `{result['domain_similarity']['trend_correlation']:.4f}`，说明两类退化过程在健康状态空间中具有较强同向性。",
+        f"只使用附件 2 已观测 0-1800 天计算的跨域相似度为 `{result['observed_similarity']['cosine_similarity']:.4f}`，趋势相关系数为 `{result['observed_similarity']['trend_correlation']:.4f}`。",
+        f"扩展预测轨迹与轴承全寿命均值轨迹的相似度为 `{result['domain_similarity']['cosine_similarity']:.4f}`，说明两类退化过程在健康状态空间中具有较强同向性。",
         "",
         "## 3. 迁移策略",
         "",
-        "本阶段采用可解释的严重度校准迁移：保留队友任务一给出的 A1-calibrated common HI RUL 作为无迁移基线，再利用 XJTU-SY 轴承后期退化 HI 分布和高质量退化特征，对附件 2 的 RUL 进行保守校准。",
+        "本阶段采用物理一致性约束下的退化严重度迁移校准，不是 DANN/CORAL/MMD 深度迁移训练。具体做法是：保留队友任务一给出的 A1-calibrated common HI RUL 作为无迁移基线，再利用 XJTU-SY 轴承后期退化 HI 分布、阶段比例和高质量退化特征，对附件 2 的 RUL 进行校准。",
         "该策略迁移的是归一化退化状态和后期严重度，而不是直接迁移分钟级轴承寿命，因此避免了轴承加速寿命试验和飞轮在轨天级数据之间的时间尺度冲突。",
         "",
         "## 4. RUL 对比",
         "",
         "| 方法 | EOL day | RUL / days |",
         "|---|---:|---:|",
-        f"| 任务一无迁移基线 | {transfer['baseline_eol_day']:.1f} | {transfer['baseline_rul_days']:.1f} |",
-        f"| 轴承迁移校准 | {transfer['transferred_eol_day']:.1f} | {transfer['transferred_rul_days']:.1f} |",
+    ]
+    for row in result["transfer_comparison"]:
+        lines.append(f"| {row['method']} | {row['eol_day']:.1f} | {row['rul_days']:.1f} |")
+    lines += [
         "",
-        f"迁移校准因子 severity_scale = `{transfer['severity_scale']:.4f}`，迁移置信度 = `{transfer['transfer_confidence']:.4f}`。",
+        f"严重度迁移因子 severity_scale = `{transfer['severity_scale']:.4f}`，迁移置信度 = `{transfer['transfer_confidence']:.4f}`。",
         "",
-        "## 5. 预警机制与建议",
+        "## 5. 敏感性分析",
+        "",
+        "对综合迁移系数进行 `-10%`、`-5%`、`0`、`+5%`、`+10%` 扰动，检查推荐 RUL 对迁移系数的敏感程度。结果写入 `results/task3_transfer_sensitivity.csv`。",
+        "",
+        "## 6. 预警机制与建议",
         "",
         "| 等级 | 判据 | 含义 |",
         "|---|---|---|",
@@ -267,7 +405,7 @@ def _write_health_report(project_root: Path, result: dict[str, Any], feature_qua
         "",
         f"当前建议：{warning['recommended_action']}",
         "",
-        "## 6. 高质量迁移特征 Top 5",
+        "## 7. 高质量迁移特征 Top 5",
         "",
         "| 特征 | 单调性 | 趋势性 | 稳定性 | 可迁移性 | 综合评分 |",
         "|---|---:|---:|---:|---:|---:|",
@@ -278,14 +416,73 @@ def _write_health_report(project_root: Path, result: dict[str, Any], feature_qua
         )
     lines += [
         "",
-        "## 7. 不确定性与局限性",
+        "## 8. 不确定性与局限性",
         "",
         "- XJTU-SY 是地面加速寿命试验，飞轮附件 2 是在轨监测数据，两者工作环境和采样模态不同。",
         "- 当前迁移方法强调可解释性和稳健性，尚不是端到端深度域适配模型。",
         "- 附件 2 缺少真实失效终点，因此 RUL 是模型外推估计。",
         "- 预警等级应作为工程辅助决策，不能替代姿控系统安全规则。",
         "",
-        "## 8. 图像",
+        "## 9. 图像",
+        "",
+    ]
+    for fig in result["figures"]:
+        rel = Path(fig).relative_to(project_root)
+        lines.append(f"![{rel.stem}](../{rel.as_posix()})")
+        lines.append("")
+    report_path.write_text("\n".join(lines), encoding="utf-8")
+    return str(report_path)
+
+
+def _write_task3_report(project_root: Path, result: dict[str, Any], report_path: Path) -> str:
+    lines = [
+        "# 问题三增强实验报告：跨领域迁移学习",
+        "",
+        "## 1. 实验目标",
+        "",
+        "本实验将问题二中从 XJTU-SY 滚动轴承学习到的退化规律迁移到反作用轮，用于改进问题一的附件 2 RUL 预测结果。",
+        "当前方法是物理一致性约束下的退化严重度迁移校准，不是 DANN/CORAL/MMD 深度迁移训练。",
+        "",
+        "## 2. 为什么可以迁移",
+        "",
+        "滚动轴承与反作用轮轴承都存在润滑退化、摩擦增强、退化观测量上升这一共同物理链条。轴承侧表现为振动能量和时频特征变化，飞轮侧表现为电流、温度和 common HI 上升。",
+        f"仅使用附件 2 已观测 0-1800 天时，飞轮 HI 与轴承 HI 的归一化轨迹相似度为 `{result['observed_similarity']['cosine_similarity']:.4f}`，趋势相关系数为 `{result['observed_similarity']['trend_correlation']:.4f}`。",
+        "",
+        "## 3. 迁移方法对比",
+        "",
+        "| 方法 | 说明 | RUL / 天 | EOL day |",
+        "|---|---|---:|---:|",
+    ]
+    for row in result["transfer_comparison"]:
+        lines.append(f"| {row['method']} | {row['description']} | {row['rul_days']:.1f} | {row['eol_day']:.1f} |")
+    lines += [
+        "",
+        f"推荐采用 `{result['recommended_rul']['method']}`，RUL 为 `{result['recommended_rul']['rul_days']:.1f}` 天，区间为 `[{result['recommended_rul']['rul_interval'][0]:.1f}, {result['recommended_rul']['rul_interval'][1]:.1f}]` 天。",
+        "",
+        "## 4. 敏感性分析",
+        "",
+        "| 迁移系数扰动 | 迁移系数 | RUL / 天 | 相对名义 RUL 变化 / 天 |",
+        "|---:|---:|---:|---:|",
+    ]
+    for row in result["transfer_sensitivity"]:
+        lines.append(
+            f"| {100 * row['factor_delta']:.0f}% | {row['transfer_factor']:.4f} | {row['rul_days']:.1f} | {row['rul_change_vs_nominal_days']:.1f} |"
+        )
+    lines += [
+        "",
+        "敏感性分析表明，推荐 RUL 会随迁移系数变化而单调变化，但在 ±10% 扰动内仍处于同一量级，说明迁移结论对小范围参数扰动具有一定稳定性。",
+        "",
+        "## 5. 输出文件",
+        "",
+        "- `results/task3_observed_similarity.json`",
+        "- `results/task3_transfer_comparison.csv`",
+        "- `results/task3_transfer_sensitivity.csv`",
+        "- `results/task3_transfer_summary.json`",
+        "- `figures/transfer_health/observed_domain_similarity.png`",
+        "- `figures/transfer_health/task3_transfer_comparison.png`",
+        "- `figures/transfer_health/task3_sensitivity.png`",
+        "",
+        "## 6. 图像",
         "",
     ]
     for fig in result["figures"]:
@@ -306,10 +503,28 @@ def generate_transfer_health_management(project_root: Path, dpi: int = 320) -> d
 
     bearing_ref = _bearing_reference(bearing_hi, feature_quality)
     transfer = _transfer_calibrate(task1, bearing_ref)
+    stage_info = _stage_ratio_factor(task1, bearing_hi)
+    comparison = _build_transfer_comparison(task1, transfer, stage_info)
+    sensitivity = _build_sensitivity(comparison)
+    combined = comparison[comparison["method"] == "combined_transfer"].iloc[0]
+    recommended_interval = [
+        float(sensitivity["rul_days"].min()),
+        float(sensitivity["rul_days"].max()),
+    ]
     stage = task1["stage_assessment"]["current_stage"]
-    warning = _warning_level(stage, transfer["baseline_current_value"], transfer["transferred_rul_days"])
+    warning = _warning_level(stage, transfer["baseline_current_value"], float(combined["rul_days"]))
     sim_fig, similarity = _plot_domain_similarity(project_root, bearing_ref["mean_curve"], task1_predictions, dpi)
+    observed_similarity, observed_fig = _observed_similarity(project_root, bearing_ref, task1_predictions, dpi)
     rul_fig = _plot_rul_comparison(project_root, task1_predictions, task1, transfer, dpi)
+    comparison_fig = _plot_transfer_comparison(project_root, comparison, dpi)
+    sensitivity_fig = _plot_sensitivity(project_root, sensitivity, dpi)
+
+    comparison_path = project_root / "results" / "task3_transfer_comparison.csv"
+    sensitivity_path = project_root / "results" / "task3_transfer_sensitivity.csv"
+    observed_similarity_path = project_root / "results" / "task3_observed_similarity.json"
+    comparison.to_csv(comparison_path, index=False)
+    sensitivity.to_csv(sensitivity_path, index=False)
+    observed_similarity_path.write_text(json.dumps(_jsonable(observed_similarity), ensure_ascii=False, indent=2), encoding="utf-8")
 
     result = {
         "status": "processed",
@@ -325,15 +540,35 @@ def generate_transfer_health_management(project_root: Path, dpi: int = 320) -> d
             "top_feature_score": bearing_ref["top_feature_score"],
         },
         "bearing_transfer": transfer,
+        "stage_ratio_transfer": stage_info,
+        "transfer_comparison": comparison.to_dict(orient="records"),
+        "transfer_sensitivity": sensitivity.to_dict(orient="records"),
+        "recommended_rul": {
+            "method": "combined_transfer",
+            "rul_days": float(combined["rul_days"]),
+            "eol_day": float(combined["eol_day"]),
+            "rul_interval": recommended_interval,
+        },
+        "observed_similarity": observed_similarity,
         "domain_similarity": similarity,
         "warning": warning,
-        "figures": [rul_fig, sim_fig],
+        "figures": [rul_fig, sim_fig, observed_fig, comparison_fig, sensitivity_fig],
+        "task3_outputs": {
+            "observed_similarity_json": str(observed_similarity_path),
+            "transfer_comparison_csv": str(comparison_path),
+            "transfer_sensitivity_csv": str(sensitivity_path),
+            "transfer_summary_json": str(project_root / "results" / "task3_transfer_summary.json"),
+        },
     }
     result_path = project_root / "results" / "transfer_health_management_results.json"
     result_path.write_text(json.dumps(_jsonable(result), ensure_ascii=False, indent=2), encoding="utf-8")
     report_path = _write_health_report(project_root, result, feature_quality)
-    result["outputs"] = {"result_json": str(result_path), "report": report_path}
+    task3_summary_path = project_root / "results" / "task3_transfer_summary.json"
+    task3_report_path = project_root / "reports" / "task3_transfer_report_cn.md"
+    _write_task3_report(project_root, result, task3_report_path)
+    result["outputs"] = {"result_json": str(result_path), "report": report_path, "task3_report": str(task3_report_path)}
     result_path.write_text(json.dumps(_jsonable(result), ensure_ascii=False, indent=2), encoding="utf-8")
+    task3_summary_path.write_text(json.dumps(_jsonable(result), ensure_ascii=False, indent=2), encoding="utf-8")
     return result
 
 

@@ -152,7 +152,9 @@ Best model counts: `{'random_forest': 15}`
 ## 10. Transfer Learning and Health Management
 Task-1 baseline RUL: `608.6` days
 Bearing-transfer calibrated RUL: `683.7` days
-Transfer RUL interval: `[542.8, 824.6]` days
+Recommended combined-transfer RUL: `690.0` days
+Recommended RUL interval: `[627.3, 766.7]` days
+Observed 0-1800d similarity: `0.9931`
 Cross-domain trajectory similarity: `0.9902`
 Trend correlation: `0.9899`
 Current stage: `Accelerated Degradation`
@@ -161,4 +163,10 @@ Recommended action: `进入重点监测，缩短健康评估周期，限制连�
 ![Attachment2 Transfer Rul Comparison](../figures/transfer_health/attachment2_transfer_rul_comparison.png)
 
 ![Flywheel Bearing Domain Similarity](../figures/transfer_health/flywheel_bearing_domain_similarity.png)
+
+![Observed Domain Similarity](../figures/transfer_health/observed_domain_similarity.png)
+
+![Task3 Transfer Comparison](../figures/transfer_health/task3_transfer_comparison.png)
+
+![Task3 Sensitivity](../figures/transfer_health/task3_sensitivity.png)
 

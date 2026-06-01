@@ -1,0 +1,6 @@
+{
+  "observed_days": 1800,
+  "cosine_similarity": 0.9930520170864908,
+  "trajectory_rmse": 0.08912205635562835,
+  "trend_correlation": 0.9874418484228056
+}

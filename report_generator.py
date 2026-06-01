@@ -148,13 +148,22 @@ class ReportGenerator:
         if transfer_health_results:
             lines.append("## 10. Transfer Learning and Health Management")
             transfer = transfer_health_results.get("bearing_transfer", {})
+            recommended = transfer_health_results.get("recommended_rul", {})
             warning = transfer_health_results.get("warning", {})
             similarity = transfer_health_results.get("domain_similarity", {})
+            observed_similarity = transfer_health_results.get("observed_similarity", {})
             interval = transfer.get("transferred_rul_interval", [])
             lines.append(f"Task-1 baseline RUL: `{transfer.get('baseline_rul_days'):.1f}` days")
             lines.append(f"Bearing-transfer calibrated RUL: `{transfer.get('transferred_rul_days'):.1f}` days")
-            if len(interval) == 2:
+            if recommended:
+                lines.append(f"Recommended combined-transfer RUL: `{recommended.get('rul_days'):.1f}` days")
+                rec_interval = recommended.get("rul_interval", [])
+                if len(rec_interval) == 2:
+                    lines.append(f"Recommended RUL interval: `[{rec_interval[0]:.1f}, {rec_interval[1]:.1f}]` days")
+            elif len(interval) == 2:
                 lines.append(f"Transfer RUL interval: `[{interval[0]:.1f}, {interval[1]:.1f}]` days")
+            if observed_similarity:
+                lines.append(f"Observed 0-1800d similarity: `{observed_similarity.get('cosine_similarity'):.4f}`")
             lines.append(f"Cross-domain trajectory similarity: `{similarity.get('cosine_similarity'):.4f}`")
             lines.append(f"Trend correlation: `{similarity.get('trend_correlation'):.4f}`")
             lines.append(f"Current stage: `{transfer_health_results.get('current_stage')}`")

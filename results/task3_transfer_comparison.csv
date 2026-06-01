@@ -1,0 +1,5 @@
+method,description,transfer_factor,rul_days,eol_day
+no_transfer,Task-1 A1-calibrated common HI baseline,1.0,608.5708690064148,2408.570869006415
+severity_transfer,Bearing late-life HI severity calibration,0.8900900711700686,683.7182985385035,2483.7182985385034
+stage_ratio_transfer,Bearing accelerated-stage proportion calibration,0.8738394320043693,696.4332882192159,2496.4332882192157
+combined_transfer,Average of severity and stage-ratio transfer factors,0.8819647515872189,690.0172233767919,2490.0172233767917

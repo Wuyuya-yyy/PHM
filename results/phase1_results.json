@@ -671,6 +671,88 @@
         824.5993964551835
       ]
     },
+    "stage_ratio_transfer": {
+      "current_progress_proxy": 1.0,
+      "bearing_accelerated_stage_ratio_median": 0.48124999999999996,
+      "stage_factor": 1.144375
+    },
+    "transfer_comparison": [
+      {
+        "method": "no_transfer",
+        "description": "Task-1 A1-calibrated common HI baseline",
+        "transfer_factor": 1.0,
+        "rul_days": 608.5708690064148,
+        "eol_day": 2408.570869006415
+      },
+      {
+        "method": "severity_transfer",
+        "description": "Bearing late-life HI severity calibration",
+        "transfer_factor": 0.8900900711700686,
+        "rul_days": 683.7182985385035,
+        "eol_day": 2483.7182985385034
+      },
+      {
+        "method": "stage_ratio_transfer",
+        "description": "Bearing accelerated-stage proportion calibration",
+        "transfer_factor": 0.8738394320043693,
+        "rul_days": 696.4332882192159,
+        "eol_day": 2496.4332882192157
+      },
+      {
+        "method": "combined_transfer",
+        "description": "Average of severity and stage-ratio transfer factors",
+        "transfer_factor": 0.8819647515872189,
+        "rul_days": 690.0172233767919,
+        "eol_day": 2490.0172233767917
+      }
+    ],
+    "transfer_sensitivity": [
+      {
+        "factor_delta": -0.1,
+        "transfer_factor": 0.793768276428497,
+        "rul_days": 766.685803751991,
+        "rul_change_vs_nominal_days": 76.6685803751991
+      },
+      {
+        "factor_delta": -0.05,
+        "transfer_factor": 0.8378665140078579,
+        "rul_days": 726.3339193439915,
+        "rul_change_vs_nominal_days": 36.31669596719962
+      },
+      {
+        "factor_delta": 0.0,
+        "transfer_factor": 0.8819647515872189,
+        "rul_days": 690.0172233767919,
+        "rul_change_vs_nominal_days": 0.0
+      },
+      {
+        "factor_delta": 0.05,
+        "transfer_factor": 0.9260629891665798,
+        "rul_days": 657.1592603588495,
+        "rul_change_vs_nominal_days": -32.85796301794244
+      },
+      {
+        "factor_delta": 0.1,
+        "transfer_factor": 0.9701612267459409,
+        "rul_days": 627.2883848879926,
+        "rul_change_vs_nominal_days": -62.72883848879928
+      }
+    ],
+    "recommended_rul": {
+      "method": "combined_transfer",
+      "rul_days": 690.0172233767919,
+      "eol_day": 2490.0172233767917,
+      "rul_interval": [
+        627.2883848879926,
+        766.685803751991
+      ]
+    },
+    "observed_similarity": {
+      "observed_days": 1800,
+      "cosine_similarity": 0.9930520170864908,
+      "trajectory_rmse": 0.08912205635562835,
+      "trend_correlation": 0.9874418484228056
+    },
     "domain_similarity": {
       "cosine_similarity": 0.9902167829414723,
       "trajectory_rmse": 0.07579869824179854,
@@ -682,11 +764,21 @@
     },
     "figures": [
       "/Users/nightye/Desktop/PHM/figures/transfer_health/attachment2_transfer_rul_comparison.png",
-      "/Users/nightye/Desktop/PHM/figures/transfer_health/flywheel_bearing_domain_similarity.png"
+      "/Users/nightye/Desktop/PHM/figures/transfer_health/flywheel_bearing_domain_similarity.png",
+      "/Users/nightye/Desktop/PHM/figures/transfer_health/observed_domain_similarity.png",
+      "/Users/nightye/Desktop/PHM/figures/transfer_health/task3_transfer_comparison.png",
+      "/Users/nightye/Desktop/PHM/figures/transfer_health/task3_sensitivity.png"
     ],
+    "task3_outputs": {
+      "observed_similarity_json": "/Users/nightye/Desktop/PHM/results/task3_observed_similarity.json",
+      "transfer_comparison_csv": "/Users/nightye/Desktop/PHM/results/task3_transfer_comparison.csv",
+      "transfer_sensitivity_csv": "/Users/nightye/Desktop/PHM/results/task3_transfer_sensitivity.csv",
+      "transfer_summary_json": "/Users/nightye/Desktop/PHM/results/task3_transfer_summary.json"
+    },
     "outputs": {
       "result_json": "/Users/nightye/Desktop/PHM/results/transfer_health_management_results.json",
-      "report": "/Users/nightye/Desktop/PHM/reports/health_management_report_cn.md"
+      "report": "/Users/nightye/Desktop/PHM/reports/health_management_report_cn.md",
+      "task3_report": "/Users/nightye/Desktop/PHM/reports/task3_transfer_report_cn.md"
     }
   }
 }
