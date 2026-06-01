@@ -15,7 +15,8 @@
 
 ## 3. 迁移策略
 
-本阶段采用物理一致性约束下的退化严重度迁移校准，不是 DANN/CORAL/MMD 深度迁移训练。具体做法是：保留队友任务一给出的 A1-calibrated common HI RUL 作为无迁移基线，再利用 XJTU-SY 轴承后期退化 HI 分布、阶段比例和高质量退化特征，对附件 2 的 RUL 进行校准。
+本报告中的健康管理推荐采用物理一致性约束下的退化严重度迁移校准。具体做法是：保留队友任务一给出的 A1-calibrated common HI RUL 作为无迁移基线，再利用 XJTU-SY 轴承后期退化 HI 分布、阶段比例和高质量退化特征，对附件 2 的 RUL 进行校准。
+训练式 DANN/CORAL/MMD/AutoEncoder 深度域适配实验已另行完成，并作为增强验证和保守对照写入 `reports/deep_transfer_report_cn.md` 与 `reports/task3_deep_transfer_integrated_report_cn.md`。
 该策略迁移的是归一化退化状态和后期严重度，而不是直接迁移分钟级轴承寿命，因此避免了轴承加速寿命试验和飞轮在轨天级数据之间的时间尺度冲突。
 
 ## 4. RUL 对比

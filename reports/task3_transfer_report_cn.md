@@ -3,7 +3,7 @@
 ## 1. 实验目标
 
 本实验将问题二中从 XJTU-SY 滚动轴承学习到的退化规律迁移到反作用轮，用于改进问题一的附件 2 RUL 预测结果。
-当前方法是物理一致性约束下的退化严重度迁移校准，不是 DANN/CORAL/MMD 深度迁移训练。
+本报告中的推荐 RUL 采用物理一致性约束下的退化严重度迁移校准；训练式 DANN/CORAL/MMD/AutoEncoder 对比实验已在 `reports/deep_transfer_report_cn.md` 和 `reports/task3_deep_transfer_integrated_report_cn.md` 中单独给出，作为增强验证和保守对照。
 
 ## 2. 为什么可以迁移
 
