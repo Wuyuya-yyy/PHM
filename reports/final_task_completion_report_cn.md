@@ -78,20 +78,33 @@ python3 main.py
 1. 读取任务一推荐的 A1-calibrated common HI RUL 作为无迁移基线。
 2. 从 XJTU-SY 轴承中学习后期退化 HI 分布和高质量迁移特征。
 3. 比较飞轮 common-HI 轨迹与轴承 HI 轨迹的归一化相似性。
-4. 用轴承后期退化严重度对任务一 RUL 做保守校准。
+4. 对比无迁移、严重度迁移、阶段比例迁移、综合迁移四种 RUL。
+5. 对综合迁移系数做 `±5%`、`±10%` 敏感性分析。
+
+需要明确：当前任务三采用的是“物理一致性约束下的退化严重度迁移校准”，不是 DANN/CORAL/MMD 深度域适配训练。仓库中的 DANN、CORAL、MMD、AutoEncoder 是预留接口，不能在论文中写成已经完成了对抗训练、协方差对齐训练、MMD 最小化训练或深度 AutoEncoder 跨域联合训练。
 
 核心结果：
 
 - 任务一无迁移 RUL：`608.6` 天。
-- 轴承迁移校准 RUL：约 `683.7` 天，具体见 `results/transfer_health_management_results.json`。
-- 输出迁移 RUL 对比图和跨域相似性图。
+- 严重度迁移 RUL：`683.7` 天。
+- 阶段比例迁移 RUL：`696.4` 天。
+- 综合迁移推荐 RUL：`690.0` 天。
+- 推荐 RUL 区间：`627.3 - 766.7` 天。
+- 已输出迁移 RUL 对比图、跨域相似性图和敏感性分析图。
 
 核心文件：
 
 - `transfer_health_management.py`
 - `results/transfer_health_management_results.json`
+- `results/task3_observed_similarity.json`
+- `results/task3_transfer_comparison.csv`
+- `results/task3_transfer_sensitivity.csv`
+- `results/task3_transfer_summary.json`
 - `figures/transfer_health/attachment2_transfer_rul_comparison.png`
 - `figures/transfer_health/flywheel_bearing_domain_similarity.png`
+- `figures/transfer_health/observed_domain_similarity.png`
+- `figures/transfer_health/task3_transfer_comparison.png`
+- `figures/transfer_health/task3_sensitivity.png`
 
 ## 5. 任务四：飞轮健康管理报告
 

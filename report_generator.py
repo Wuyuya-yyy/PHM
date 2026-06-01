@@ -73,8 +73,8 @@ class ReportGenerator:
         lines.append("## 3. Health Index Construction")
         lines.append(
             "The initial health index HI(t) is constructed by direction-consistent Min-Max normalization "
-            "and one-dimensional PCA fusion. The AutoEncoder interface is reserved for subsequent "
-            "cross-modal shared latent degradation representation learning."
+            "and one-dimensional PCA fusion. The AutoEncoder interface is reserved for later "
+            "cross-modal representation learning and is not part of the completed training pipeline."
         )
         for dataset, info in hi_results.items():
             meta = info.get("metadata", {})
@@ -114,9 +114,10 @@ class ReportGenerator:
         lines.append("")
         lines.append("## 7. Extension Interfaces")
         lines.append(
-            "The project reserves modular interfaces for XJTU-SY bearing feature extraction, transfer learning, "
-            "multimodal fusion, shared latent degradation space learning, Transformer-based forecasting, attention "
-            "mechanisms, and probabilistic warning."
+            "The project reserves modular interfaces for transfer learning, multimodal fusion, shared latent "
+            "space learning, Transformer-based forecasting, attention mechanisms, and probabilistic warning. "
+            "Reserved DANN, CORAL, MMD, and AutoEncoder modules should not be described as completed deep "
+            "domain-adaptation experiments."
         )
         lines.append("")
         if bearing_results:
@@ -169,6 +170,10 @@ class ReportGenerator:
             lines.append(f"Current stage: `{transfer_health_results.get('current_stage')}`")
             lines.append(f"Warning level: `{warning.get('level')}`")
             lines.append(f"Recommended action: `{warning.get('recommended_action')}`")
+            lines.append(
+                "Method note: the completed transfer result is physical-consistency constrained degradation "
+                "severity calibration, not trained DANN/CORAL/MMD deep domain adaptation."
+            )
             self._append_figures(lines, transfer_health_results.get("figures", []))
             lines.append("")
         self.report_path.parent.mkdir(parents=True, exist_ok=True)

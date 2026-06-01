@@ -50,7 +50,7 @@ Z-score outlier counts: `{'day': 0, 'current': 0, 'current_theoretical': 0, 'tem
 
 
 ## 3. Health Index Construction
-The initial health index HI(t) is constructed by direction-consistent Min-Max normalization and one-dimensional PCA fusion. The AutoEncoder interface is reserved for subsequent cross-modal shared latent degradation representation learning.
+The initial health index HI(t) is constructed by direction-consistent Min-Max normalization and one-dimensional PCA fusion. The AutoEncoder interface is reserved for later cross-modal representation learning and is not part of the completed training pipeline.
 ### attachment1_reaction_wheel_3500d_data
 Feature columns: `['current', 'temperature', 'friction_torque', 'speed_rpm']`
 PCA explained variance ratio: `0.9999`
@@ -110,7 +110,7 @@ Target variable: `current`
 At this stage, RUL analysis is based on monotonic HI progression and degradation model extrapolation. A probabilistic RUL module is reserved under `rul_prediction/` for uncertainty-aware prediction after bearing data and cross-domain samples are added.
 
 ## 7. Extension Interfaces
-The project reserves modular interfaces for XJTU-SY bearing feature extraction, transfer learning, multimodal fusion, shared latent degradation space learning, Transformer-based forecasting, attention mechanisms, and probabilistic warning.
+The project reserves modular interfaces for transfer learning, multimodal fusion, shared latent space learning, Transformer-based forecasting, attention mechanisms, and probabilistic warning. Reserved DANN, CORAL, MMD, and AutoEncoder modules should not be described as completed deep domain-adaptation experiments.
 
 ## 8. XJTU-SY Bearing Feature Engineering
 Current status: `processed`
@@ -160,6 +160,7 @@ Trend correlation: `0.9899`
 Current stage: `Accelerated Degradation`
 Warning level: `Level 2 - Warning`
 Recommended action: `进入重点监测，缩短健康评估周期，限制连续长时间高转速工作。`
+Method note: the completed transfer result is physical-consistency constrained degradation severity calibration, not trained DANN/CORAL/MMD deep domain adaptation.
 ![Attachment2 Transfer Rul Comparison](../figures/transfer_health/attachment2_transfer_rul_comparison.png)
 
 ![Flywheel Bearing Domain Similarity](../figures/transfer_health/flywheel_bearing_domain_similarity.png)

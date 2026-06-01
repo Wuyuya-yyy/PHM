@@ -4,6 +4,8 @@
 
 This report documents the current Cross-modal Shared Latent Degradation Prototype. The objective is to establish a Shared Latent Degradation Space in which reaction-wheel telemetry degradation features and future XJTU-SY bearing vibration features can be represented by a unified latent state z(t).
 
+The present latent-space module is a prototype and analysis interface. It does not yet train a cross-domain deep AutoEncoder, DANN, CORAL, or MMD model to align bearing and flywheel latent variables.
+
 ## 2. Current Flywheel Encoder
 
 The implemented Flywheel Encoder is a PyTorch module with the structure:
@@ -32,3 +34,5 @@ The prototype generates PCA and t-SNE latent trajectory plots, latent cluster pl
 ## 6. Physics-informed Extension
 
 The physics-informed constraint module reserves monotonicity, temporal continuity, and physical consistency losses. These constraints will support degradation continuity and physically interpretable latent dynamics in the next stage.
+
+For the completed task-three experiment, the valid result is the interpretable transfer-calibration pipeline based on HI trajectory similarity, RUL comparison, and sensitivity analysis, not an end-to-end trained latent domain-adaptation network.
